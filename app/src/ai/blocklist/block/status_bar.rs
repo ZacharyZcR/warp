@@ -1066,10 +1066,8 @@ fn render_fallback_explanation<V: View>(
         .and_then(|base_id| llm_prefs.get_llm_info(base_id))
         .map(|info| info.base_model_name.as_str());
     let text = match primary_name {
-        Some(primary) => {
-            format!("The primary model ({primary}) failed. Retrying with the fallback model.")
-        }
-        None => "The primary model failed. Retrying with the fallback model.".to_owned(),
+        Some(primary) => t!("ai_ext.primary_model_failed_named", primary).to_string(),
+        None => t!("ai_ext.primary_model_failed").to_string(),
     };
     let appearance = Appearance::as_ref(app);
     Text::new_inline(
@@ -1122,8 +1120,8 @@ fn resolve_fallback_warping_message<V: View>(
         return None;
     }
     Some(match display_name.as_deref() {
-        Some(name) => format!("Warping with {name}."),
-        None => "Warping with another model.".to_owned(),
+        Some(name) => t!("ai_ext.warping_with_model", name).to_string(),
+        None => t!("ai_ext.warping_with_another_model").to_string(),
     })
 }
 

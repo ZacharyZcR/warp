@@ -357,7 +357,7 @@ impl AgentInputFooter {
         let fast_forward_button = ctx.add_typed_action_view(|_ctx| {
             ActionButton::new("", FastForwardButtonTheme)
                 .with_icon(Icon::FastForward)
-                .with_tooltip(FAST_FORWARD_OFF_TOOLTIP)
+                .with_tooltip(t!("ai_ext.auto_approve_actions"))
                 .with_size(button_size)
                 .with_tooltip_alignment(TooltipAlignment::Left)
                 .with_disabled_theme(FastForwardLockedTheme)
@@ -481,7 +481,7 @@ impl AgentInputFooter {
             ActionButton::new("", InstallPluginButtonTheme)
                 .with_icon(Icon::X)
                 .with_size(cli_button_size)
-                .with_tooltip("Dismiss")
+                .with_tooltip(t!("ai_ext.dismiss"))
                 .with_tooltip_alignment(TooltipAlignment::Left)
                 .with_adjoined_side(AdjoinedSide::Left)
                 .on_click(|ctx| {
@@ -554,8 +554,8 @@ impl AgentInputFooter {
                 let is_open = matches!(new_input_state, CLIAgentInputState::Open { .. });
                 me.rich_input_button.update(ctx, |button, ctx| {
                     if is_open {
-                        button.set_label("Hide Rich Input", ctx);
-                        button.set_tooltip(Some("Hide Rich Input"), ctx);
+                        button.set_label(t!("ai_ext.hide_rich_input"), ctx);
+                        button.set_tooltip(Some(t!("ai_ext.hide_rich_input")), ctx);
                         button.set_keybinding(
                             Some(KeystrokeSource::Binding(
                                 OPEN_CLI_AGENT_RICH_INPUT_KEYBINDING,
@@ -563,8 +563,8 @@ impl AgentInputFooter {
                             ctx,
                         );
                     } else {
-                        button.set_label("Rich Input", ctx);
-                        button.set_tooltip(Some("Open Rich Input"), ctx);
+                        button.set_label(t!("ai_ext.rich_input"), ctx);
+                        button.set_tooltip(Some(t!("ai_ext.open_rich_input")), ctx);
                         button.set_keybinding(
                             Some(KeystrokeSource::Binding(
                                 OPEN_CLI_AGENT_RICH_INPUT_KEYBINDING,
@@ -580,7 +580,7 @@ impl AgentInputFooter {
         let start_remote_control_button = ctx.add_typed_action_view(|_ctx| {
             ActionButton::new("/remote-control", RemoteControlButtonTheme)
                 .with_icon(Icon::Phone01)
-                .with_tooltip(START_REMOTE_CONTROL_TOOLTIP)
+                .with_tooltip(t!("ai_ext.start_remote_control"))
                 .with_size(cli_button_size)
                 .with_tooltip_alignment(TooltipAlignment::Left)
                 .on_click(|ctx| {
@@ -592,7 +592,7 @@ impl AgentInputFooter {
             ActionButton::new(t!("ai_ext.stop_sharing"), RemoteControlButtonTheme)
                 .with_icon(Icon::StopFilled)
                 .with_icon_ansi_color(AnsiColorIdentifier::Red)
-                .with_tooltip("Stop sharing")
+                .with_tooltip(t!("ai_ext.stop_sharing"))
                 .with_size(cli_button_size)
                 .with_tooltip_alignment(TooltipAlignment::Left)
                 .on_click(|ctx| {
@@ -603,7 +603,7 @@ impl AgentInputFooter {
         let context_window_button = ctx.add_typed_action_view(|_ctx| {
             ActionButton::new("", AgentInputButtonTheme)
                 .with_icon(Icon::ConversationContext0)
-                .with_tooltip("Context window usage")
+                .with_tooltip(t!("ai_ext.context_window_usage"))
                 .with_size(button_size)
                 .with_tooltip_alignment(TooltipAlignment::Left)
         });
@@ -1976,11 +1976,11 @@ impl AgentInputFooter {
             Icon::FastForward
         };
         let tooltip = if is_force_enabled {
-            FAST_FORWARD_LOCKED_TOOLTIP
+            FAST_FORWARD_LOCKED_TOOLTIP.to_string()
         } else if is_active {
-            FAST_FORWARD_ON_TOOLTIP
+            t!("ai_ext.turn_off_auto_approve").to_string()
         } else {
-            FAST_FORWARD_OFF_TOOLTIP
+            t!("ai_ext.auto_approve_actions").to_string()
         };
 
         self.fast_forward_button.update(ctx, |button, ctx| {
@@ -1999,9 +1999,9 @@ impl AgentInputFooter {
             .get()
             .is_anonymous_or_logged_out();
         let tooltip = if login_required {
-            START_REMOTE_CONTROL_LOGIN_REQUIRED_TOOLTIP
+            t!("ai_ext.login_to_use_remote_control").to_string()
         } else {
-            START_REMOTE_CONTROL_TOOLTIP
+            t!("ai_ext.start_remote_control").to_string()
         };
         self.start_remote_control_button.update(ctx, |button, ctx| {
             button.set_disabled(login_required, ctx);
@@ -2016,7 +2016,7 @@ impl AgentInputFooter {
             let usage = conversation.context_window_usage();
             let icon = icon_for_context_window_usage(usage);
             let remaining_pct = ((1.0 - usage) * 100.0).round() as i32;
-            let tooltip = format!("{remaining_pct}% context remaining");
+            let tooltip = t!("ai_ext.context_remaining", pct = remaining_pct).to_string();
 
             self.context_window_button.update(ctx, |button, ctx| {
                 button.set_icon(Some(icon), ctx);

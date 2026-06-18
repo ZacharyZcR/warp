@@ -597,7 +597,7 @@ impl ImportedCommentElementState {
                 ActionButton::new("", NakedTheme)
                     .with_icon(Icon::Github)
                     .with_size(ButtonSize::Small)
-                    .with_tooltip("Open in GitHub")
+                    .with_tooltip(t!("ai_ext.open_in_github"))
                     .on_click({
                         let url = url.clone();
                         move |ctx| {
@@ -1405,7 +1405,7 @@ impl AIBlock {
         let rewind_button = ctx.add_typed_action_view(|_| {
             ActionButton::new(t!("ai_ext.rewind"), RewindButtonTheme)
                 .with_size(ButtonSize::XSmall)
-                .with_tooltip("Rewind to before this block")
+                .with_tooltip(t!("ai_ext.rewind_tooltip"))
                 .on_click(move |ctx| {
                     ctx.dispatch_typed_action(TerminalAction::RewindAIConversation {
                         ai_block_view_id,
@@ -6216,7 +6216,7 @@ impl TypedActionView for AIBlock {
                 let window_id = ctx.window_id();
                 ToastStack::handle(ctx).update(ctx, |toast_stack, ctx| {
                     toast_stack.add_ephemeral_toast(
-                        DismissibleToast::success(String::from("Copied to clipboard")),
+                        DismissibleToast::success(t!("ai_ext.copied_to_clipboard").to_string()),
                         window_id,
                         ctx,
                     );
@@ -6523,7 +6523,7 @@ impl TypedActionView for AIBlock {
                 let window_id = ctx.window_id();
                 ToastStack::handle(ctx).update(ctx, |toast_stack, ctx| {
                     let toast =
-                        DismissibleToast::default(String::from("Thank you for the feedback!"));
+                        DismissibleToast::default(t!("ai_ext.thank_you_feedback").to_string());
                     toast_stack.add_ephemeral_toast(toast, window_id, ctx);
                 });
 

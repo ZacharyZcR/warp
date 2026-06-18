@@ -1323,7 +1323,7 @@ impl View for CLISubagentView {
             AIAgentActionType::TransferShellCommandControlToUser { ref reason } => {
                 Some(render_blocked_action(
                     BlockedActionProps {
-                        header: BLOCKED_ACTION_MESSAGE_FOR_TRANSFER_CONTROL.to_string(),
+                        header: t!("ai_ext.agent_asking_take_control").to_string(),
                         description: Some(render_transfer_control_reason(reason, app)),
                         is_allow_menu_open: false,
                         allow_menu: None,
@@ -1620,7 +1620,7 @@ fn render_web_search(query: Option<String>, app: &AppContext) -> Box<dyn Element
     let theme = appearance.theme();
 
     let text = if let Some(q) = query {
-        format!("Searching the web for \"{q}\"")
+        t!("ai_ext.searching_web_for_query", q = q).to_string()
     } else {
         LOAD_OUTPUT_MESSAGE_FOR_WEB_SEARCH.to_string()
     };

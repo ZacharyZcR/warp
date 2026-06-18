@@ -284,19 +284,30 @@ use crate::util::bindings::custom_tag_to_keystroke;
 impl Display for SettingsSection {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            SettingsSection::About => write!(f, "{}", t!("settings.about")),
+            SettingsSection::Account => write!(f, "{}", t!("settings.account")),
+            SettingsSection::Appearance => write!(f, "{}", t!("settings.appearance")),
             SettingsSection::BillingAndUsage => write!(f, "{}", t!("settings.billing_and_usage")),
+            SettingsSection::Features => write!(f, "{}", t!("settings.features")),
             SettingsSection::Keybindings => write!(f, "{}", t!("settings.keyboard_shortcuts")),
+            SettingsSection::Privacy => write!(f, "{}", t!("settings.privacy")),
+            SettingsSection::Referrals => write!(f, "{}", t!("settings.referrals")),
             SettingsSection::SharedBlocks => write!(f, "{}", t!("settings.shared_blocks")),
+            SettingsSection::Teams => write!(f, "{}", t!("settings.teams")),
             SettingsSection::MCPServers => write!(f, "{}", t!("settings.mcp_servers")),
             SettingsSection::Scripting => write!(f, "Scripting"),
             SettingsSection::WarpDrive => write!(f, "{}", t!("settings.warp_drive")),
             SettingsSection::WarpAgent => write!(f, "{}", t!("settings.warp_agent")),
             SettingsSection::AgentProfiles => write!(f, "{}", t!("settings.profiles")),
-            SettingsSection::AgentMCPServers => write!(f, "MCP servers"),
+            SettingsSection::AgentMCPServers => write!(f, "{}", t!("settings.mcp_servers")),
             SettingsSection::Knowledge => write!(f, "{}", t!("settings.knowledge")),
-            SettingsSection::ThirdPartyCLIAgents => write!(f, "{}", t!("settings.third_party_cli_agents")),
+            SettingsSection::ThirdPartyCLIAgents => {
+                write!(f, "{}", t!("settings.third_party_cli_agents"))
+            }
             SettingsSection::CodeIndexing => write!(f, "{}", t!("settings.indexing_and_projects")),
-            SettingsSection::EditorAndCodeReview => write!(f, "{}", t!("settings.editor_and_code_review")),
+            SettingsSection::EditorAndCodeReview => {
+                write!(f, "{}", t!("settings.editor_and_code_review"))
+            }
             SettingsSection::CloudEnvironments => write!(f, "{}", t!("settings.environments")),
             SettingsSection::OzCloudAPIKeys => write!(f, "{}", t!("settings.oz_cloud_api_keys")),
             _ => write!(f, "{self:?}"),

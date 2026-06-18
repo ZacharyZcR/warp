@@ -828,10 +828,11 @@ impl View for Transcript {
             blocks.add_child(self.render_user_prompt(request, appearance));
 
             let transcript_part_index = transcript.len();
+            let in_flight_request_text = t!("ai_assistant.generating_answer").to_string();
             let in_flight_request_markdown = markdown_segments_from_text(
                 transcript_part_index,
                 TranscriptPartSubType::Answer,
-                IN_FLIGHT_REQUEST_TEXT,
+                &in_flight_request_text,
             );
             blocks.add_child(self.render_assistant_answer(
                 transcript_part_index,
@@ -840,7 +841,7 @@ impl View for Transcript {
                     copy_all_tooltip_and_button_mouse_handles: None,
                     formatted_message: FormattedTranscriptMessage {
                         markdown: in_flight_request_markdown,
-                        raw: IN_FLIGHT_REQUEST_TEXT.to_owned(),
+                        raw: in_flight_request_text,
                     },
                 },
                 appearance,
@@ -881,7 +882,10 @@ impl View for Transcript {
 
             blocks.add_child(
                 Container::new(
-                    self.render_warning_message(ACCURACY_NOTICE_TEXT.to_string(), appearance),
+                    self.render_warning_message(
+                        t!("ai_assistant.accuracy_notice").to_string(),
+                        appearance,
+                    ),
                 )
                 .with_margin_top(DETAILS_BOTTOM_MARGIN)
                 .with_margin_bottom(if current_transcript_summarized {
@@ -895,7 +899,7 @@ impl View for Transcript {
             if current_transcript_summarized {
                 blocks.add_child(
                     Container::new(self.render_warning_message(
-                        MISSING_CONTEXT_NOTICE_TEXT.to_string(),
+                        t!("ai_assistant.missing_context_notice").to_string(),
                         appearance,
                     ))
                     .with_margin_bottom(DETAILS_BOTTOM_MARGIN)

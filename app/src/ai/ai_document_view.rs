@@ -135,6 +135,10 @@ impl From<PaneEvent> for AIDocumentEvent {
 
 pub const DEFAULT_PLANNING_DOCUMENT_TITLE: &str = "Planning document";
 
+pub fn default_planning_document_title() -> String {
+    t!("ai_document.default_planning_document_title").to_string()
+}
+
 /// Entry for the version history dropdown menu.
 struct VersionMenuEntry {
     version: AIDocumentVersion,
@@ -359,7 +363,7 @@ impl AIDocumentView {
         let document_title = AIDocumentModel::as_ref(ctx)
             .get_document(&document_id, document_version)
             .map(|doc| doc.get_title())
-            .unwrap_or_else(|| DEFAULT_PLANNING_DOCUMENT_TITLE.to_string());
+            .unwrap_or_else(default_planning_document_title);
         let pane_configuration = ctx.add_model(|_ctx| PaneConfiguration::new(document_title));
 
         // Create version menu view and subscribe to close events to hide overlay
@@ -378,7 +382,7 @@ impl AIDocumentView {
             ActionButton::new("", NakedTheme)
                 .with_icon(icons::Icon::History)
                 .with_size(ButtonSize::Small)
-                .with_tooltip("Show version history")
+                .with_tooltip(t!("ai_ext.show_version_history").to_string())
                 .on_click(|ctx| {
                     ctx.dispatch_typed_action(
                         PaneHeaderAction::<AIDocumentAction, AIDocumentAction>::CustomAction(
@@ -402,7 +406,7 @@ impl AIDocumentView {
         let save_action = keybinding_name_to_keystroke(SAVE_FILE_BINDING_NAME, ctx)
             .map(|k| k.displayed())
             .unwrap_or(t!("ai_document.click").to_string());
-        let tooltip_text = format!("This plan has changes the agent isn't aware of. {save_action} to stop the agent's current task and send the updated plan");
+        let tooltip_text = t!("ai_document.update_plan_tooltip", save_action = save_action).to_string();
         let update_plan_button = ctx.add_typed_action_view(|_ctx| {
             ActionButton::new(t!("ai_ext.update_agent"), PrimaryTheme)
                 .with_size(ButtonSize::Small)
@@ -713,7 +717,7 @@ impl AIDocumentView {
                 let color = theme.nonactive_ui_detail().into_solid();
                 let ui_builder = appearance.ui_builder().clone();
                 let tooltip_text =
-                    "This plan is synced to your Warp Drive and will auto save any edits you make."
+                    t!("ai_document.synced_tooltip")
                         .to_string();
                 let synced_status_mouse_state = self.synced_status_mouse_state.clone();
                 Container::new(
@@ -771,7 +775,7 @@ impl AIDocumentView {
         let title = AIDocumentModel::as_ref(app)
             .get_current_document(&self.document_id)
             .map(|doc| doc.title.clone())
-            .unwrap_or_else(|| DEFAULT_PLANNING_DOCUMENT_TITLE.to_string());
+            .unwrap_or_else(default_planning_document_title);
 
         let version_button = SavePosition::new(
             ChildView::new(&self.version_button).finish(),

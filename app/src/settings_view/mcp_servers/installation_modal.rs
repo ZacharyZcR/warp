@@ -257,7 +257,7 @@ impl InstallationModalBody {
 
         // Renders MCP title text
         let title = Text::new(
-            format!("Install {name}"),
+            t!("mcp.install_server", server = name),
             appearance.ui_font_family(),
             appearance.header_font_size(),
         )
@@ -423,13 +423,13 @@ impl InstallationModalBody {
         .finish();
 
         let source_text = if is_shared {
-            "Shared from team"
+            t!("mcp.shared_from_team")
         } else {
-            "From another device"
+            t!("mcp.from_another_device")
         };
 
         let label_text = Text::new_inline(
-            source_text.to_string(),
+            source_text,
             appearance.ui_font_family(),
             appearance.ui_font_size(),
         )
@@ -548,7 +548,7 @@ impl View for InstallationModalBody {
                 .finish()
         } else {
             Text::new(
-                "No MCP server selected",
+                t!("mcp.no_server_selected").to_string(),
                 appearance.ui_font_family(),
                 appearance.ui_font_size(),
             )

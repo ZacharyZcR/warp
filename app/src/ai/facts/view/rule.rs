@@ -293,13 +293,13 @@ impl RuleView {
         let search_bar = ctx.add_typed_action_view(|_| SearchBar::new(search_editor.clone()));
 
         let add_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new(t!("ai_ext.add"), NakedTheme)
+            ActionButton::new("Add", NakedTheme)
                 .with_icon(Icon::Plus)
                 .on_click(|ctx| ctx.dispatch_typed_action(RuleViewAction::AddRule))
         });
 
         let initialize_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new(t!("ai_ext.initialize_project"), NakedTheme)
+            ActionButton::new("Initialize Project", NakedTheme)
                 .with_icon(Icon::Plus)
                 .on_click(|ctx| ctx.dispatch_typed_action(RuleViewAction::InitializeProject))
         });
@@ -734,7 +734,7 @@ impl RuleView {
             appearance
                 .ui_builder()
                 .button(ButtonVariant::Outlined, project_row.mouse_state.clone())
-                .with_text_label(t!("rules.open_file").to_string())
+                .with_text_label("Open file".to_string())
                 .build()
                 .on_click(move |ctx, _, _| {
                     ctx.dispatch_typed_action(RuleViewAction::OpenFile(file_path.clone()));
@@ -768,12 +768,12 @@ impl RuleView {
         let formatted_name = match name {
             Some(name) => {
                 if name.is_empty() {
-                    t!("rules.untitled").to_string()
+                    "Untitled".to_string()
                 } else {
                     name
                 }
             }
-            None => t!("rules.untitled").to_string(),
+            None => "Untitled".to_string(),
         };
         // Truncate content to 3 lines
         let formatted_content = if content.split("\n").count() > 3 {

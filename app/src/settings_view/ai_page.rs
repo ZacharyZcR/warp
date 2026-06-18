@@ -7841,9 +7841,7 @@ impl ApiKeysWidget {
     fn render_custom_inference_description(&self, app: &AppContext) -> Box<dyn Element> {
         let appearance = Appearance::as_ref(app);
         let text_fragments = vec![
-            FormattedTextFragment::plain_text(
-                "Use your own API keys from model providers for Warp Agent. You can also add custom endpoints to use third-party models. Custom endpoints must support the OpenAI-compatible Chat Completions API. API keys are stored only on your device, never on Warp's servers. They're used to make requests to your chosen model provider. Using auto models or models from providers you have not provided API keys for will consume Warp credits. ",
-            ),
+            FormattedTextFragment::plain_text(t!("ai_settings_page.api_keys_description")),
             FormattedTextFragment::hyperlink("Learn more", CUSTOM_INFERENCE_LEARN_MORE_URL),
         ];
         let description = FormattedTextElement::new(

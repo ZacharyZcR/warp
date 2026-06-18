@@ -489,7 +489,7 @@ impl PlatformPageWidget {
         appearance: &Appearance,
     ) -> Box<dyn Element> {
         let text = vec![
-            FormattedTextFragment::plain_text("Create and manage API keys to allow other Oz cloud agents to access your Warp account.\nFor more information, visit the "),
+            FormattedTextFragment::plain_text(t!("platform.api_keys_description_prefix")),
             FormattedTextFragment::hyperlink(t!("platform.documentation_link"), API_KEY_DOCS_URL),
         ];
 
@@ -524,7 +524,11 @@ impl PlatformPageWidget {
             Flex::row()
                 .with_cross_axis_alignment(CrossAxisAlignment::Center)
                 .with_child(
-                    Text::new_inline("Oz Cloud API Keys", appearance.ui_font_family(), 16.)
+                    Text::new_inline(
+                        t!("platform.oz_cloud_api_keys").to_string(),
+                        appearance.ui_font_family(),
+                        16.,
+                    )
                         .with_style(Properties::default().weight(Weight::Bold))
                         .with_color(appearance.theme().active_ui_text_color().into())
                         .with_clip(ClipConfig::end())

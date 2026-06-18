@@ -99,7 +99,7 @@ impl RuleEditorView {
                 },
                 ctx,
             );
-            editor.set_placeholder_text(RULE_NAME_PLACEHOLDER_TEXT, ctx);
+            editor.set_placeholder_text(t!("rules.name_placeholder").to_string(), ctx);
             editor
         });
         ctx.subscribe_to_view(&name_editor, |me, _editor, event, ctx| {
@@ -126,7 +126,7 @@ impl RuleEditorView {
                 },
                 ctx,
             );
-            editor.set_placeholder_text(RULE_DESCRIPTION_PLACEHOLDER_TEXT, ctx);
+            editor.set_placeholder_text(t!("rules.rule_placeholder").to_string(), ctx);
             editor
         });
         ctx.subscribe_to_view(&content_editor, |me, _editor, event, ctx| {
@@ -258,9 +258,9 @@ impl RuleEditorView {
 
     fn render_header(&self, appearance: &Appearance) -> Box<dyn Element> {
         let title = if self.ai_fact.is_none() {
-            "Add Rule"
+            t!("rules.add_rule")
         } else {
-            "Edit Rule"
+            t!("rules.edit_rule")
         };
         Container::new(
             Flex::row()
@@ -333,13 +333,25 @@ impl RuleEditorView {
     fn render_form(&self, appearance: &Appearance) -> Box<dyn Element> {
         Flex::column()
             .with_child(
-                Container::new(appearance.ui_builder().span("Name").build().finish())
-                    .with_margin_bottom(style::ITEM_BOTTOM_MARGIN)
-                    .finish(),
+                Container::new(
+                    appearance
+                        .ui_builder()
+                        .span(t!("rules.name").to_string())
+                        .build()
+                        .finish(),
+                )
+                .with_margin_bottom(style::ITEM_BOTTOM_MARGIN)
+                .finish(),
             )
             .with_child(self.render_name_editor(appearance))
             .with_child(
-                Container::new(appearance.ui_builder().span("Rule").build().finish())
+                Container::new(
+                    appearance
+                        .ui_builder()
+                        .span(t!("rules.rule").to_string())
+                        .build()
+                        .finish(),
+                )
                     .with_margin_bottom(style::ITEM_BOTTOM_MARGIN)
                     .finish(),
             )

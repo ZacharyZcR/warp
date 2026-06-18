@@ -144,7 +144,7 @@ pub fn init(app: &mut AppContext) {
     app.register_fixed_bindings([FixedBinding::custom(
         CustomAction::CloseCurrentSession,
         AIAssistantAction::ClosePanel,
-        "Close Warp AI",
+        t!("ai_assistant.close").to_string(),
         id!("AIAssistantPanel"),
     )]);
 
@@ -196,7 +196,8 @@ impl AIAssistantPanelView {
             })
         };
         editor.update(ctx, |editor, ctx| {
-            editor.set_placeholder_text(INIT_PLACEHOLDER_TEXT, ctx)
+            editor
+                .set_placeholder_text(t!("ai_assistant.ask_question_placeholder").to_string(), ctx)
         });
         ctx.subscribe_to_view(&editor, |me, _, event, ctx| {
             me.handle_editor_event(event, ctx);
@@ -563,7 +564,10 @@ impl AIAssistantPanelView {
             RequestsEvent::RequestFinished { .. } => {
                 self.editor.update(ctx, |editor, ctx| {
                     editor.clear_buffer_and_reset_undo_stack(ctx);
-                    editor.set_placeholder_text(FOLLOWUP_PLACEHOLDER_TEXT, ctx);
+                    editor.set_placeholder_text(
+                        t!("ai_assistant.followup_placeholder").to_string(),
+                        ctx,
+                    );
                 });
                 self.transcript_view.update(ctx, |transcript_view, ctx| {
                     transcript_view.scroll_to_bottom_of_transcript(ctx);
@@ -631,7 +635,8 @@ impl AIAssistantPanelView {
         }
 
         self.editor.update(ctx, |editor, ctx| {
-            editor.set_placeholder_text(INIT_PLACEHOLDER_TEXT, ctx);
+            editor
+                .set_placeholder_text(t!("ai_assistant.ask_question_placeholder").to_string(), ctx);
         });
 
         self.requests_model.update(ctx, |requests_model, ctx| {
@@ -839,7 +844,7 @@ impl AIAssistantPanelView {
             .with_children([
                 Container::new(
                     Text::new_inline(
-                        "Character limit exceeded.",
+                        t!("ai_assistant.character_limit_exceeded"),
                         appearance.ui_font_family(),
                         BODY_FONT_SIZE,
                     )
@@ -903,7 +908,11 @@ impl AIAssistantPanelView {
             )
             .with_child(
                 Container::new(
-                    Text::new_inline(ASK_AI_ASSISTANT_TEXT, appearance.ui_font_family(), 14.)
+                    Text::new_inline(
+                        t!("ai_assistant.ask_warp_ai").to_string(),
+                        appearance.ui_font_family(),
+                        14.,
+                    )
                         .with_color(sub_text_color)
                         .finish(),
                 )
@@ -966,7 +975,10 @@ impl AIAssistantPanelView {
                             1.,
                             appearance
                                 .ui_builder()
-                                .wrappable_text(ZERO_STATE_HELP_TEXT.to_string(), true)
+                                .wrappable_text(
+                                    t!("ai_assistant.zero_state_help").to_string(),
+                                    true,
+                                )
                                 .with_style(UiComponentStyles {
                                     font_family_id: Some(appearance.ui_font_family()),
                                     font_size: Some(ZERO_STATE_HELP_TEXT_FONT_SIZE),

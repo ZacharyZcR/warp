@@ -123,7 +123,7 @@ pub(super) fn new_state(
     });
 
     let commit_button = ctx.add_typed_action_view(|_ctx| {
-        ActionButton::new(t!("code_review_ext.commit"), SecondaryTheme)
+        ActionButton::new("Commit", SecondaryTheme)
             .with_size(ButtonSize::XSmall)
             .with_height(32.)
             .with_icon(Icon::GitCommit)
@@ -147,7 +147,7 @@ pub(super) fn new_state(
 
     let commit_and_create_pr_button = if allow_create_pr {
         Some(ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new(t!("code_review_ext.commit_and_create_pr"), SecondaryTheme)
+            ActionButton::new("Commit and create PR", SecondaryTheme)
                 .with_size(ButtonSize::XSmall)
                 .with_height(32.)
                 .with_icon(Icon::Github)

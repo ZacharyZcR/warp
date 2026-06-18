@@ -255,7 +255,7 @@ impl AuthViewBody {
             .with_child(
                 ui_builder
                     .link(
-                        t!("auth.paste_token_from_browser").into(),
+                        "Click here to paste your token from the browser".into(),
                         None,
                         Some(Box::new(|ctx| {
                             ctx.dispatch_typed_action(AuthViewBodyAction::EnterToken);
@@ -336,7 +336,7 @@ impl AuthViewBody {
                 .with_child(
                     ui_builder
                         .link(
-                            t!("auth.terms_of_service").into(),
+                            "Terms of Service".into(),
                             Some(TOS_URL.into()),
                             None,
                             self.mouse_state_handles.tos_mouse_state_handle.clone(),
@@ -356,7 +356,7 @@ impl AuthViewBody {
             Align::new(
                 ui_builder
                     .link(
-                        t!("auth.privacy_settings").into(),
+                        "Privacy Settings".into(),
                         None,
                         Some(Box::new(|ctx| {
                             ctx.dispatch_typed_action(AuthViewBodyAction::ShowOverlay(
@@ -394,7 +394,7 @@ impl AuthViewBody {
                         .with_child(
                             ui_builder
                                 .link(
-                                    t!("auth.privacy_settings").into(),
+                                    "Privacy Settings".into(),
                                     None,
                                     Some(Box::new(|ctx| {
                                         ctx.dispatch_typed_action(AuthViewBodyAction::ShowOverlay(
@@ -474,7 +474,7 @@ impl AuthViewBody {
                 Some(click_button_style),
                 None,
             )
-            .with_centered_text_label(t!("workspace.sign_up").into())
+            .with_centered_text_label("Sign up".into())
             .build()
             .on_click(move |ctx, _, _| {
                 ctx.dispatch_typed_action(on_click_action);
@@ -493,7 +493,7 @@ impl AuthViewBody {
             .with_child(
                 ui_builder
                     .link(
-                        t!("auth.sign_in").into(),
+                        "Sign in".into(),
                         None,
                         Some(Box::new(|ctx| {
                             ctx.dispatch_typed_action(AuthViewBodyAction::Login);
@@ -521,7 +521,7 @@ impl AuthViewBody {
                 .with_child(
                     ui_builder
                         .link(
-                            t!("auth.skip_for_now").into(),
+                            "Skip for now".into(),
                             None,
                             Some(Box::new(|ctx| {
                                 ctx.dispatch_typed_action(AuthViewBodyAction::InitiateLoginLater);
@@ -566,7 +566,7 @@ impl AuthViewBody {
                         .with_child(
                             ui_builder
                                 .link(
-                                    t!("auth.yes_skip_login").into(),
+                                    "Yes, skip login".into(),
                                     None,
                                     Some(Box::new(|ctx| {
                                         ctx.dispatch_typed_action(AuthViewBodyAction::LoginLater);
@@ -776,7 +776,7 @@ impl AuthViewBody {
                         .with_child(
                             ui_builder
                                 .link(
-                                    t!("auth.copy_the_url").into(),
+                                    "copy the URL".into(),
                                     None,
                                     Some(Box::new(|event_ctx| {
                                         event_ctx.dispatch_typed_action(

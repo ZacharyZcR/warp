@@ -328,7 +328,12 @@ pub fn render_request_limit_info(
         .with_cross_axis_alignment(CrossAxisAlignment::Center)
         .with_child(
             Text::new_inline(
-                format!("Credits used: {num_requests_used} / {request_limit}.",),
+                t!(
+                    "ai_assistant.credits_used",
+                    num_requests_used = num_requests_used,
+                    request_limit = request_limit
+                )
+                .to_string(),
                 appearance.ui_font_family(),
                 REQUEST_LIMIT_INFO_FONT_SIZE,
             )
@@ -369,7 +374,7 @@ pub fn render_request_limit_info(
         row.add_child(
             Container::new(
                 Text::new_inline(
-                    format!("{next_refresh_time} until refresh."),
+                    t!("ai_assistant.until_refresh", next_refresh_time = next_refresh_time).to_string(),
                     appearance.ui_font_family(),
                     REQUEST_LIMIT_INFO_FONT_SIZE,
                 )
