@@ -84,7 +84,7 @@ pub fn render_welcome_banner(
     );
 
     // "New" badge
-    let text = Text::new_inline("New".to_string(), appearance.ui_font_family(), 14.)
+    let text = Text::new_inline(t!("common.new_badge").to_string(), appearance.ui_font_family(), 14.)
         .with_color(PhenomenonStyle::modal_badge_text())
         .finish();
     let badge = ConstrainedBox::new(

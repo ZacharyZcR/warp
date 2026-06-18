@@ -362,7 +362,7 @@ impl AccountWidget {
             .with_cross_axis_alignment(CrossAxisAlignment::End);
         let current_user_id = auth_state.user_id().unwrap_or_default();
 
-        plan_info.add_child(render_customer_type_badge(appearance, "Free".into()));
+        plan_info.add_child(render_customer_type_badge(appearance, t!("settings.free").into()));
         plan_info.add_child(
             Container::new(
                 appearance
@@ -510,7 +510,7 @@ impl AccountWidget {
                         appearance
                             .ui_builder()
                             .link(
-                                "Contact support".into(),
+                                t!("settings.contact_support").into(),
                                 Some("mailto:support@warp.dev".into()),
                                 None,
                                 self.ui_state_handles.enterprise_contact_us_link.clone(),
@@ -527,7 +527,7 @@ impl AccountWidget {
                             appearance
                                 .ui_builder()
                                 .link(
-                                    "Manage billing".into(),
+                                    t!("settings.manage_billing").into(),
                                     None,
                                     Some(Box::new(move |ctx| {
                                         ctx.dispatch_typed_action(
@@ -583,7 +583,7 @@ impl AccountWidget {
                 appearance
                     .ui_builder()
                     .link(
-                        "Compare plans".into(),
+                        t!("settings.compare_plans").into(),
                         None,
                         Some(Box::new(move |ctx| {
                             ctx.dispatch_typed_action(MainPageAction::Upgrade {
@@ -713,7 +713,7 @@ impl SettingsWidget for SettingsSyncWidget {
         };
 
         Container::new(render_body_item::<MainPageAction>(
-            "Settings sync".to_string(),
+            t!("settings.settings_sync").to_string(),
             Some(label_info),
             // Cloud prefs are always synced, so no need to show the local-only icon.
             LocalOnlyIconState::Hidden,
@@ -797,7 +797,7 @@ impl SettingsWidget for EarnRewardsWidget {
                 appearance
                     .ui_builder()
                     .link(
-                        "Refer a friend".into(),
+                        t!("settings.refer_a_friend").into(),
                         None,
                         Some(Box::new(move |ctx| {
                             ctx.dispatch_typed_action(WorkspaceAction::ShowReferralSettingsPage);
@@ -930,7 +930,7 @@ impl VersionInfoWidget {
                     1.0,
                     Align::new(
                         Text::new_inline(
-                            "Version".to_string(),
+                            t!("settings.version").to_string(),
                             appearance.ui_font_family(),
                             REGULAR_TEXT_FONT_SIZE,
                         )
