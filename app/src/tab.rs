@@ -268,7 +268,7 @@ impl TabData {
                     .is_active_sharer()
                 {
                     menu_items.push(
-                        MenuItemFields::new("Stop sharing")
+                        MenuItemFields::new(t!("tab.stop_sharing"))
                             .with_on_select_action(WorkspaceAction::StopSharingSessionFromTabMenu {
                                 terminal_view_id: focused_session_view.id(),
                             })
@@ -276,7 +276,7 @@ impl TabData {
                     );
                 } else {
                     menu_items.push(
-                        MenuItemFields::new("Share session")
+                        MenuItemFields::new(t!("tab.share_session"))
                             .with_on_select_action(WorkspaceAction::OpenShareSessionModal(index))
                             .into_item(),
                     );
@@ -286,7 +286,7 @@ impl TabData {
             // Always show an option to stop sharing all when there's at least 1 shared session in the tab.
             if !shared_session_view_ids.is_empty() {
                 menu_items.push(
-                    MenuItemFields::new("Stop sharing all")
+                    MenuItemFields::new(t!("tab.stop_sharing_all"))
                         .with_on_select_action(WorkspaceAction::StopSharingAllSessionsInTab {
                             pane_group: self.pane_group.downgrade(),
                         })
@@ -311,7 +311,7 @@ impl TabData {
 
         if is_shared_or_viewed {
             menu_items.push(
-                MenuItemFields::new("Copy link")
+                MenuItemFields::new(t!("tab.copy_link"))
                     .with_on_select_action(WorkspaceAction::CopySharedSessionLinkFromTab {
                         tab_index: index,
                     })
@@ -440,7 +440,7 @@ impl TabData {
 
         // TODO add option to show the keybinding once we figure out a nice API to retrieve
         // the actual keybinding (based on the user's preferences etc.)
-        menu_items.append(&mut vec![MenuItemFields::new("Rename tab")
+        menu_items.append(&mut vec![MenuItemFields::new(t!("tab.rename"))
             .with_on_select_action(WorkspaceAction::RenameTab(index))
             .into_item()]);
         // Group together with rename option (note, resetting doesn't make
@@ -448,7 +448,7 @@ impl TabData {
         let title = self.pane_group.as_ref(ctx).custom_title(ctx);
         if title.is_some() {
             menu_items.push(
-                MenuItemFields::new("Reset tab name")
+                MenuItemFields::new(t!("tab.reset_name"))
                     .with_on_select_action(WorkspaceAction::ResetTabName(index))
                     .into_item(),
             );
@@ -526,14 +526,14 @@ impl TabData {
 
         if ContextFlag::CloseWindow.is_enabled() || tabs_len != 1 {
             menu_items.push(
-                MenuItemFields::new("Close tab")
+                MenuItemFields::new(t!("tab.close"))
                     .with_on_select_action(WorkspaceAction::CloseTab(index))
                     .into_item(),
             );
         }
         if tabs_len > 1 {
             menu_items.push(
-                MenuItemFields::new("Close other tabs")
+                MenuItemFields::new(t!("tab.close_other"))
                     .with_on_select_action(WorkspaceAction::CloseOtherTabs(index))
                     .into_item(),
             );
@@ -557,7 +557,7 @@ impl TabData {
         if !FeatureFlag::TabConfigs.is_enabled() {
             return vec![];
         }
-        vec![MenuItemFields::new("Save as new config")
+        vec![MenuItemFields::new(t!("tab.save_as_new_config"))
             .with_on_select_action(WorkspaceAction::SaveCurrentTabAsNewConfig(index))
             .into_item()]
     }
@@ -659,7 +659,7 @@ impl TabData {
                             Some(id) => id.to_ansi_color(&terminal_colors).into(),
                         };
                         let tooltip = match ansi_id {
-                            None => "Default (no color)".to_string(),
+                            None => t!("tab.default_no_color").to_string(),
                             Some(id) => id.to_string(),
                         };
 
@@ -1395,7 +1395,7 @@ impl<'a> TabComponent<'a> {
 
                         if state.is_hovered() {
                             let tooltip = ui_builder
-                                .tool_tip("Cloud agent run".to_string())
+                                .tool_tip(t!("tab.cloud_agent_run").to_string())
                                 .build()
                                 .finish();
                             stack.add_positioned_overlay_child(

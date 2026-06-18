@@ -216,8 +216,8 @@ impl EnableAutoReloadModalBody {
     fn render_content(&self, appearance: &Appearance) -> Box<dyn Element> {
         let theme = appearance.theme();
         let explanation_fragments = vec![
-            FormattedTextFragment::plain_text("When enabled, "),
-            FormattedTextFragment::bold("auto-reload"),
+            FormattedTextFragment::plain_text(t!("auto_reload.when_enabled_prefix")),
+            FormattedTextFragment::bold(t!("auto_reload.auto_reload")),
             FormattedTextFragment::plain_text(
                 " will automatically purchase your selected package when you run out. ",
             ),
@@ -274,7 +274,7 @@ impl EnableAutoReloadModalBody {
                 }),
                 ..Default::default()
             })
-            .with_text_label("Cancel".to_string())
+            .with_text_label(t!("common.cancel").to_string())
             .build()
             .on_click(|ctx, _, _| {
                 ctx.dispatch_typed_action(Action::Cancel);
@@ -282,9 +282,9 @@ impl EnableAutoReloadModalBody {
             .finish();
 
         let button_text = if self.update_workspace_settings_loading {
-            "Saving...".to_string()
+            t!("common.saving").to_string()
         } else {
-            "Enable".to_string()
+            t!("common.enable").to_string()
         };
 
         let mut enable_button = appearance
@@ -423,7 +423,7 @@ impl EnableAutoReloadModal {
         let body = ctx.add_typed_action_view(EnableAutoReloadModalBody::new);
 
         let modal = ctx.add_typed_action_view(|ctx| {
-            Modal::new(Some("Enable auto reload?".to_string()), body.clone(), ctx).with_body_style(
+            Modal::new(Some(t!("auto_reload.enable_auto_reload_title").to_string()), body.clone(), ctx).with_body_style(
                 UiComponentStyles {
                     // Padding of 0 here since we add a horizontal bar that needs to span the full width in the body
                     // So we handle padding in the body itself

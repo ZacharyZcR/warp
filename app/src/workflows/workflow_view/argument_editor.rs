@@ -582,7 +582,7 @@ impl WorkflowView {
                 )
                 .with_tooltip(move || {
                     ui_builder
-                        .tool_tip("Add a workflow argument".to_string())
+                        .tool_tip(t!("arguments.add_workflow_argument").to_string())
                         .build()
                         .finish()
                 })
@@ -820,7 +820,7 @@ impl WorkflowView {
                         .add_environment_variables_mouse_state
                         .clone(),
                 )
-                .with_centered_text_label("Add environment variables".to_string())
+                .with_centered_text_label(t!("arguments.add_environment_variables").to_string())
                 .build()
                 .on_click(|ctx, _, _| {
                     ctx.dispatch_typed_action(WorkspaceAction::CreatePersonalEnvVarCollection);

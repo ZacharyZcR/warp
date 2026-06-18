@@ -137,7 +137,7 @@ impl FreeUserNoAiSlide {
             Icon::Terminal,
             "Classic terminal with third-party agents",
             "A modern terminal that supports third-party agents (Claude Code, Codex, Gemini CLI) and classic terminal workflows.",
-            "Free".to_string(),
+            t!("onboarding.free_user_no_ai.free_badge").to_string(),
             false, // badge is gray
             self.classic_terminal_mouse_state.clone(),
             selected_index,
@@ -302,7 +302,7 @@ impl FreeUserNoAiSlide {
         let back_button = self.back_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Back".into()),
+                content: button::Content::Label(t!("onboarding.back").into()),
                 theme: &button::themes::Naked,
                 options: button::Options {
                     on_click: Some(Box::new(|ctx, _app, _pos| {
@@ -318,7 +318,7 @@ impl FreeUserNoAiSlide {
             self.next_button.render(
                 appearance,
                 button::Params {
-                    content: button::Content::Label("Get Warping".into()),
+                    content: button::Content::Label(t!("onboarding.get_warping").into()),
                     theme: &button::themes::Primary,
                     options: button::Options {
                         keystroke: Some(enter),
@@ -333,7 +333,7 @@ impl FreeUserNoAiSlide {
             self.subscribe_nav_button.render(
                 appearance,
                 button::Params {
-                    content: button::Content::Label("Subscribe".into()),
+                    content: button::Content::Label(t!("onboarding.free_user_no_ai.subscribe").into()),
                     theme: &button::themes::Primary,
                     options: button::Options {
                         on_click: Some(Box::new(|ctx, _app, _pos| {
@@ -347,7 +347,7 @@ impl FreeUserNoAiSlide {
             self.next_button.render(
                 appearance,
                 button::Params {
-                    content: button::Content::Label("Next".into()),
+                    content: button::Content::Label(t!("onboarding.next").into()),
                     theme: &button::themes::Primary,
                     options: button::Options {
                         disabled: true,

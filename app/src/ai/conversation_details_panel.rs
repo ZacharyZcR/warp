@@ -671,7 +671,7 @@ impl ConversationDetailsPanel {
 
         #[cfg(not(target_family = "wasm"))]
         let continue_locally_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new("Continue locally", PrimaryTheme)
+            ActionButton::new(t!("ai_ext.continue_locally"), PrimaryTheme)
                 .with_tooltip("Fork this conversation locally")
                 .with_size(ButtonSize::Small)
                 .on_click(|ctx| {
@@ -679,7 +679,7 @@ impl ConversationDetailsPanel {
                 })
         });
         let open_in_oz_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new("View in Oz", SecondaryTheme)
+            ActionButton::new(t!("ai_ext.view_in_oz"), SecondaryTheme)
                 .with_tooltip("View this run in the Oz web app")
                 .with_size(ButtonSize::Small)
                 .on_click(|ctx| {
@@ -786,7 +786,7 @@ impl ConversationDetailsPanel {
 
                 let window_id = ctx.window_id();
                 ToastStack::handle(ctx).update(ctx, |toast_stack, ctx| {
-                    let toast = DismissibleToast::default("Copied branch name".to_string());
+                    let toast = DismissibleToast::default(t!("ai_ext.copied_branch_name").to_string());
                     toast_stack.add_ephemeral_toast(toast, window_id, ctx);
                 });
             }

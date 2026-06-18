@@ -226,7 +226,7 @@ impl MCPServersListPageView {
         let search_bar = ctx.add_typed_action_view(|_| SearchBar::new(search_editor.clone()));
 
         let add_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new("Add", NakedTheme)
+            ActionButton::new(t!("mcp_ext.add"), NakedTheme)
                 .with_icon(Icon::Plus)
                 .on_click(|ctx| ctx.dispatch_typed_action(MCPServersListPageViewAction::Add))
         });
@@ -367,7 +367,7 @@ impl MCPServersListPageView {
             template
                 .description
                 .clone()
-                .or_else(|| Some("Available to install".to_string())),
+                .or_else(|| Some(t!("mcp.available_to_install").to_string())),
             None, // Templates can never have tools
             None, // Templates cannot have an error
             title_chip_text.into_iter().collect(),
@@ -1103,7 +1103,7 @@ impl MCPServersListPageView {
         let is_any_ai_enabled = ai_settings.is_any_ai_enabled(app);
 
         let label = render_body_item_label::<MCPServersListPageViewAction>(
-            "Auto-spawn servers from third-party agents".to_string(),
+            t!("mcp.file_based_label").to_string(),
             None,
             None,
             LocalOnlyIconState::Hidden,
@@ -1275,7 +1275,7 @@ impl MCPServersListPageView {
                         .map(|team| team.name.clone());
                     let shared_by_text = match team_name {
                         Some(name) => format!("Shared by Warp and {name}"),
-                        None => "Shared by Warp and from other devices".to_string(),
+                        None => t!("mcp.shared_by_warp_and_other_devices").to_string(),
                     };
 
                     page.add_child(self.render_server_cards_section(
@@ -1632,7 +1632,7 @@ impl MCPServersListPageView {
                     .templatable_mcp_server()
                     .description
                     .clone()
-                    .or_else(|| Some("Detected from config file".to_string())),
+                    .or_else(|| Some(t!("mcp.detected_from_config_file").to_string())),
                 None, // tools only available when running
                 None, // no error when not yet started
                 title_chips,

@@ -194,7 +194,7 @@ impl HandoffEnvironmentCreationModal {
             .finish();
 
         let dialog = Dialog::new(
-            "Create environment".to_string(),
+            t!("environments.create_environment").to_string(),
             None,
             dialog_styles(appearance),
         )

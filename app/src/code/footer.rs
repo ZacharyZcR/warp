@@ -675,9 +675,9 @@ impl CodeFooterView {
                     .iter()
                     .any(|s| matches!(s, LspRepoStatus::DisabledAndNotInstalled { .. }));
                 if any_needs_install {
-                    Some("Install servers".to_string())
+                    Some(t!("code.install_servers").to_string())
                 } else {
-                    Some("Enable servers".to_string())
+                    Some(t!("code.enable_servers").to_string())
                 }
             }
         }
@@ -1587,26 +1587,26 @@ impl CodeFooterView {
                 ..
             } => match PersistedWorkspace::as_ref(app).has_enabled_lsp_server_for_file_path(path) {
                 LSPEnablementResultForFile::UnsupportedLanguage => (
-                    Some("Language support is unavailable for this file type".to_string()),
+                    Some(t!("code.language_support_unavailable_file_type").to_string()),
                     false,
                 ),
                 LSPEnablementResultForFile::LSPNotEnabled { root_name } => match lsp_repo_status {
                     LspRepoStatus::CheckingForInstallation => (
                         Some(format!(
                             "Language support is not currently enabled for {}",
-                            root_name.unwrap_or("this codebase".to_string())
+                            root_name.unwrap_or(t!("code.this_codebase").to_string())
                         )),
                         false,
                     ),
                     LspRepoStatus::Ready | LspRepoStatus::Enabled => (
-                        Some("Language server is unavailable for this codebase".to_string()),
+                        Some(t!("code.language_server_unavailable_codebase").to_string()),
                         false,
                     ),
                     LspRepoStatus::DisabledAndNotInstalled { .. }
                     | LspRepoStatus::DisabledAndInstalled { .. } => (
                         Some(format!(
                             "Language support is not currently enabled for {}",
-                            root_name.unwrap_or("this codebase".to_string())
+                            root_name.unwrap_or(t!("code.this_codebase").to_string())
                         )),
                         true,
                     ),

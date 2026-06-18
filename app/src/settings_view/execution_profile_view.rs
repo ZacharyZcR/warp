@@ -53,7 +53,7 @@ impl ExecutionProfileView {
         });
 
         let edit_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Edit", SecondaryTheme)
+            ActionButton::new(t!("settings.edit"), SecondaryTheme)
                 .with_icon(Icon::Pencil)
                 .with_size(ButtonSize::Small)
                 .on_click(|ctx| {
@@ -117,14 +117,14 @@ impl View for ExecutionProfileView {
             .as_ref()
             .and_then(|id| llm_preferences.get_llm_info(id))
             .map(|info| info.display_name.clone())
-            .unwrap_or_else(|| "Auto".to_string());
+            .unwrap_or_else(|| t!("execution_profile.auto").to_string());
 
         let computer_use_model = profile
             .computer_use_model
             .as_ref()
             .and_then(|id| llm_preferences.get_llm_info(id))
             .map(|info| info.display_name.clone())
-            .unwrap_or_else(|| "Auto".to_string());
+            .unwrap_or_else(|| t!("execution_profile.auto").to_string());
 
         Container::new(
             Flex::column()
@@ -785,7 +785,7 @@ fn render_directory_allowlist(
 ) -> Box<dyn Element> {
     with_standard_vertical_margin(render_pathbuf_allowlist_row(
         Icon::Check,
-        "Directory allowlist:".to_string(),
+        t!("execution_profile.directory_allowlist").to_string(),
         &profile.directory_allowlist,
         appearance,
         is_ai_enabled,
@@ -799,7 +799,7 @@ fn render_command_allowlist(
 ) -> Box<dyn Element> {
     with_standard_vertical_margin(render_command_predicate_row(
         Icon::Check,
-        "Command allowlist:".to_string(),
+        t!("execution_profile.command_allowlist").to_string(),
         &profile.command_allowlist,
         appearance,
         is_ai_enabled,
@@ -813,7 +813,7 @@ fn render_command_denylist(
 ) -> Box<dyn Element> {
     with_standard_vertical_margin(render_command_predicate_row(
         Icon::SlashCircle,
-        "Command denylist:".to_string(),
+        t!("execution_profile.command_denylist").to_string(),
         &profile.command_denylist,
         appearance,
         is_ai_enabled,
@@ -828,7 +828,7 @@ fn render_mcp_allowlist(
 ) -> Box<dyn Element> {
     with_standard_vertical_margin(render_mcp_uuid_row(
         Icon::Check,
-        "MCP allowlist:".to_string(),
+        t!("execution_profile.mcp_allowlist").to_string(),
         &profile.mcp_allowlist,
         appearance,
         app,
@@ -844,7 +844,7 @@ fn render_mcp_denylist(
 ) -> Box<dyn Element> {
     with_standard_vertical_margin(render_mcp_uuid_row(
         Icon::SlashCircle,
-        "MCP denylist:".to_string(),
+        t!("execution_profile.mcp_denylist").to_string(),
         &profile.mcp_denylist,
         appearance,
         app,

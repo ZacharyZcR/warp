@@ -130,7 +130,7 @@ impl DetailsBar {
             let ui_builder = appearance.ui_builder().clone();
             edit_button = edit_button.with_tooltip(move || {
                 ui_builder
-                    .tool_tip("Sign in to edit".to_string())
+                    .tool_tip(t!("drive.sign_in_to_edit").to_string())
                     .build()
                     .finish()
             });
@@ -202,7 +202,7 @@ fn editor_display_name(email: Option<&str>, app: &AppContext) -> String {
         Some(email) => UserProfiles::as_ref(app)
             .displayable_identifier_for_email(email)
             .unwrap_or_else(|| email.to_string()),
-        None => "Other user".to_string(),
+        None => t!("notebook.other_user").to_string(),
     }
 }
 

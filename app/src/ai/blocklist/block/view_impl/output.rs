@@ -351,7 +351,7 @@ pub(super) fn render(props: Props, app: &AppContext) -> Box<dyn Element> {
                             let header_text = if let Some(dur) = finished_duration {
                                 format!("Thought for {}", format_elapsed_seconds(*dur))
                             } else {
-                                "Thinking".to_string()
+                                t!("ai_output.thinking").to_string()
                             };
                             if let Some(element) = render_collapsible_block(
                                 output_message,
@@ -449,7 +449,7 @@ pub(super) fn render(props: Props, app: &AppContext) -> Box<dyn Element> {
                                             // action so the user sees the error instead
                                             // of an empty box.
                                             let formatted_text = render_requested_action_body_text(
-                                                "Failed to read files".into(),
+                                                t!("ai_output.failed_to_read_files").into(),
                                                 appearance.ui_font_family(),
                                                 app,
                                             );
@@ -852,7 +852,7 @@ pub(super) fn render(props: Props, app: &AppContext) -> Box<dyn Element> {
                             SummarizationType::ConversationSummary
                         ) && !are_all_text_sections_empty(&text.sections) =>
                         {
-                            let header_text = "Conversation summarized".to_string();
+                            let header_text = t!("ai_output.conversation_summarized").to_string();
                             if let Some(element) = render_collapsible_block(
                                 output_message,
                                 header_text,
@@ -1027,7 +1027,7 @@ pub(super) fn render(props: Props, app: &AppContext) -> Box<dyn Element> {
                                         .push(FormattedTextFragment::plain_text(format!(": {q}")));
                                 }
                                 None if !done => {
-                                    fragments.push(FormattedTextFragment::plain_text("..."));
+                                    fragments.push(FormattedTextFragment::plain_text(t!("ai_output.ellipsis")));
                                 }
                                 None => {}
                             };
@@ -1167,7 +1167,7 @@ pub(super) fn render(props: Props, app: &AppContext) -> Box<dyn Element> {
                 output_items.add_child(
                     render_informational_footer(
                         app,
-                        "This response won't count towards your usage.".to_string(),
+                        t!("ai_output.response_not_counted").to_string(),
                     )
                     .with_agent_output_item_spacing(app)
                     .finish(),
@@ -1365,7 +1365,7 @@ fn render_search_codebase(
                                 appearance
                                     .ui_builder()
                                     .link(
-                                        "Manage AI Autonomy permissions".into(),
+                                        t!("ai_output.manage_ai_autonomy_permissions").into(),
                                         None,
                                         Some(Box::new(move |ctx| {
                                             ctx.dispatch_typed_action(
@@ -2017,7 +2017,7 @@ fn render_stopped_output(props: Props, app: &AppContext) -> Box<dyn Element> {
                 .initial_query()
                 .map(|task_name| format!("Stopped task: \"{task_name}\""))
         })
-        .unwrap_or_else(|| "Stopped task".to_string());
+        .unwrap_or_else(|| t!("ai_output.stopped_task").to_string());
 
     let stop_icon = Container::new(
         ConstrainedBox::new(gray_stop_icon(appearance).finish())
@@ -2112,7 +2112,7 @@ fn render_stopped_output(props: Props, app: &AppContext) -> Box<dyn Element> {
         .with_custom_label(button_content)
         .with_tooltip(move || {
             ui_builder
-                .tool_tip("Resume conversation".to_string())
+                .tool_tip(t!("ai_output.resume_conversation").to_string())
                 .build()
                 .finish()
         })
@@ -2392,12 +2392,12 @@ fn create_formatted_text_for_grep(
             .expect("Queries slice should have an element");
         let mut fragments = if is_cancelled || is_queued {
             vec![
-                FormattedTextFragment::plain_text("Grep for "),
+                FormattedTextFragment::plain_text(t!("ai_output.grep_for")),
                 FormattedTextFragment::inline_code(query),
             ]
         } else {
             vec![
-                FormattedTextFragment::plain_text("Grepping for "),
+                FormattedTextFragment::plain_text(t!("ai_output.grepping_for")),
                 FormattedTextFragment::inline_code(query),
             ]
         };
@@ -2489,12 +2489,12 @@ fn create_formatted_text_for_file_glob(
 
         let mut fragments = if is_cancelled || is_queued {
             vec![
-                FormattedTextFragment::plain_text("Search for files that match "),
+                FormattedTextFragment::plain_text(t!("ai_output.search_files_that_match")),
                 FormattedTextFragment::inline_code(pattern),
             ]
         } else {
             vec![
-                FormattedTextFragment::plain_text("Finding files that match "),
+                FormattedTextFragment::plain_text(t!("ai_output.finding_files_that_match")),
                 FormattedTextFragment::inline_code(pattern),
             ]
         };
@@ -2838,7 +2838,7 @@ fn render_use_computer(
             btn.render(
                 appearance,
                 button::Params {
-                    content: button::Content::Label("View screenshot".into()),
+                    content: button::Content::Label(t!("ai_output.view_screenshot").into()),
                     theme: &button::themes::Secondary,
                     options: button::Options {
                         size: button::Size::Small,
@@ -3117,7 +3117,7 @@ fn render_response_footer(props: Props, app: &AppContext) -> Option<Box<dyn Elem
         )
         .with_tooltip(move || {
             ui_builder
-                .tool_tip("Good response".to_string())
+                .tool_tip(t!("ai_output.good_response").to_string())
                 .build()
                 .finish()
         })
@@ -3138,7 +3138,7 @@ fn render_response_footer(props: Props, app: &AppContext) -> Option<Box<dyn Elem
         .with_tooltip(move || {
             ui_builder
                 .clone()
-                .tool_tip("Bad response".to_string())
+                .tool_tip(t!("ai_output.bad_response").to_string())
                 .build()
                 .finish()
         })
@@ -3210,7 +3210,7 @@ fn render_response_footer(props: Props, app: &AppContext) -> Option<Box<dyn Elem
         )
         .with_tooltip(move || {
             ui_builder
-                .tool_tip("Continue conversation".to_string())
+                .tool_tip(t!("ai_output.continue_conversation").to_string())
                 .build()
                 .finish()
         })
@@ -3234,7 +3234,7 @@ fn render_response_footer(props: Props, app: &AppContext) -> Option<Box<dyn Elem
         )
         .with_tooltip(move || {
             ui_builder
-                .tool_tip("Fork conversation".to_string())
+                .tool_tip(t!("ai_output.fork_conversation").to_string())
                 .build()
                 .finish()
         })
@@ -3410,7 +3410,7 @@ fn render_usage_button(props: Props, app: &AppContext) -> Box<dyn Element> {
                 // Show tooltip on hover or while clicked
                 let mut stack = Stack::new().with_child(content.finish());
                 let tooltip = ui_builder
-                    .tool_tip("Show credit usage details".to_string())
+                    .tool_tip(t!("ai_output.show_credit_usage_details").to_string())
                     .build()
                     .finish();
                 stack.add_positioned_overlay_child(
@@ -3744,7 +3744,7 @@ fn render_collapsible_debug_output(
         // "Debug output" label
         row.add_child(
             Text::new(
-                "Debug output".to_string(),
+                t!("ai_output.debug_output").to_string(),
                 appearance.ai_font_family(),
                 appearance.monospace_font_size(),
             )
@@ -3887,10 +3887,10 @@ fn conversation_search_phase(task: &crate::ai::agent::task::Task) -> Conversatio
 
 fn format_conversation_search_phase(phase: &ConversationSearchPhase) -> String {
     match phase {
-        ConversationSearchPhase::ListingMessages => "Listing messages".to_string(),
+        ConversationSearchPhase::ListingMessages => t!("ai_output.listing_messages").to_string(),
         ConversationSearchPhase::Grepping { patterns } => {
             if patterns.is_empty() {
-                return "Grepping for patterns".to_string();
+                return t!("ai_output.grepping_for_patterns").to_string();
             }
             let joined = truncate_from_end(&patterns.join(", "), 60);
             format!("Grepping for patterns: {joined}")

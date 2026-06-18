@@ -195,9 +195,9 @@ impl CreateApiKeyModal {
                         icon_color: theme.active_ui_text_color().into(),
                         label: Some(LabelConfig {
                             label: match key_type {
-                                ApiKeyType::Personal => "Personal".into(),
-                                ApiKeyType::Team => "Team".into(),
-                                ApiKeyType::Agent => "Agent".into(),
+                                ApiKeyType::Personal => t!("create_api_key.personal").into(),
+                                ApiKeyType::Team => t!("create_api_key.team").into(),
+                                ApiKeyType::Agent => t!("create_api_key.agent").into(),
                             },
                             width_override: Some(55.0),
                             color: if is_selected {
@@ -294,7 +294,7 @@ impl CreateApiKeyModal {
                     Err(err) => {
                         log::error!("Failed to load agent identities: {err}");
                         ctx.emit(CreateApiKeyModalEvent::Error {
-                            message: "Failed to load agents. Please close and try again."
+                            message: t!("create_api_key.failed_load_agents").to_string()
                                 .to_string(),
                         });
                     }
@@ -328,7 +328,7 @@ impl CreateApiKeyModal {
         let name = self.name_editor.as_ref(ctx).buffer_text(ctx);
 
         let final_name = if name.trim().is_empty() {
-            "Warp API Key".to_string()
+            t!("platform_ext.warp_api_key").to_string()
         } else {
             name.trim().to_string()
         };
@@ -352,7 +352,7 @@ impl CreateApiKeyModal {
                 None => {
                     self.request_state = RequestState::Idle;
                     ctx.emit(CreateApiKeyModalEvent::Error {
-                        message: "Please select an agent.".to_string(),
+                        message: t!("platform_ext.please_select_agent").to_string(),
                     });
                     ctx.notify();
                     return;
@@ -402,7 +402,7 @@ impl CreateApiKeyModal {
                     }
                     Ok(warp_graphql::mutations::generate_api_key::GenerateApiKeyResult::Unknown) | Err(_) => {
                         me.request_state = RequestState::Idle;
-                        ctx.emit(CreateApiKeyModalEvent::Error { message: "Failed to create API key. Please try again.".to_string() });
+                        ctx.emit(CreateApiKeyModalEvent::Error { message: t!("platform_ext.failed_create_key").to_string() });
                         ctx.notify();
                     }
                 }
@@ -551,7 +551,7 @@ impl CreateApiKeyModal {
                 ButtonVariant::Accent,
                 self.cancel_button_mouse_state.clone(),
             )
-            .with_text_label("Done".to_string())
+            .with_text_label(t!("platform_ext.done").to_string())
             .with_style(button_style)
             .build()
             .on_click(|ctx, _, _| ctx.dispatch_typed_action(CreateApiKeyModalAction::Cancel))
@@ -650,7 +650,7 @@ impl View for CreateApiKeyModal {
                         ButtonVariant::Secondary,
                         self.cancel_button_mouse_state.clone(),
                     )
-                    .with_text_label("Cancel".to_string())
+                    .with_text_label(t!("common.cancel").to_string())
                     .with_style(button_style)
                     .build()
                     .on_click(move |ctx, _, _| {
@@ -668,9 +668,9 @@ impl View for CreateApiKeyModal {
                         self.create_button_mouse_state.clone(),
                     )
                     .with_text_label(if is_pending {
-                        "Creating…".to_string()
+                        t!("platform_ext.creating").to_string()
                     } else {
-                        "Create key".to_string()
+                        t!("platform_ext.create_key").to_string()
                     })
                     .with_style(button_style)
                     .build()
@@ -741,7 +741,7 @@ impl View for CreateApiKeyModal {
                                 ButtonVariant::Secondary,
                                 self.create_agent_button_mouse_state.clone(),
                             )
-                            .with_text_label("Create agent".to_string())
+                            .with_text_label(t!("platform_ext.create_agent").to_string())
                             .with_style(button_style)
                             .build()
                             .on_click(|ctx, _, _| {
@@ -860,7 +860,7 @@ impl TypedActionView for CreateApiKeyModal {
                 let window_id = ctx.window_id();
                 crate::ToastStack::handle(ctx).update(ctx, |toast_stack, ctx| {
                     let toast = crate::view_components::DismissibleToast::success(
-                        "Secret key copied.".to_string(),
+                        t!("platform.secret_key_copied").to_string(),
                     );
                     toast_stack.add_ephemeral_toast(toast, window_id, ctx);
                 });

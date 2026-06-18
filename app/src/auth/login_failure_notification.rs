@@ -27,7 +27,7 @@ impl LoginFailureReason {
             mut fragments: Vec<FormattedTextFragment>,
         ) -> Vec<FormattedTextFragment> {
             fragments.extend([
-                FormattedTextFragment::plain_text(" Not the first time? See our "),
+                FormattedTextFragment::plain_text(t!("auth.login_troubleshooting_prefix")),
                 FormattedTextFragment::hyperlink(
                     "troubleshooting docs",
                     LOGIN_TROUBLESHOOTING_DOCS_URL,

@@ -971,7 +971,7 @@ impl AgentSlide {
         let back_button = self.back_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Back".into()),
+                content: button::Content::Label(t!("onboarding.back").into()),
                 theme: &button::themes::Naked,
                 options: button::Options {
                     on_click: Some(Box::new(|ctx, _app, _pos| {
@@ -986,7 +986,7 @@ impl AgentSlide {
         let next_button = self.next_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Next".into()),
+                content: button::Content::Label(t!("onboarding.next").into()),
                 theme: &button::themes::Primary,
                 options: button::Options {
                     keystroke: Some(enter),
@@ -1072,7 +1072,7 @@ impl AgentSlide {
         let upgrade_button = self.upgrade_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Upgrade".into()),
+                content: button::Content::Label(t!("common.upgrade").into()),
                 theme: &UpgradeButtonTheme,
                 options: button::Options {
                     size: button::Size::Small,
@@ -1169,7 +1169,7 @@ impl AgentSlide {
 
         let copy_url_link = ui_builder
             .link(
-                "copy the URL".into(),
+                t!("auth.copy_the_url").into(),
                 None,
                 Some(Box::new(|ctx| {
                     ctx.dispatch_typed_action(AgentSlideAction::CopyUpgradeUrlClicked);
@@ -1183,7 +1183,7 @@ impl AgentSlide {
 
         let paste_token_link = ui_builder
             .link(
-                "Click here".into(),
+                t!("onboarding.agent.click_here").into(),
                 None,
                 Some(Box::new(|ctx| {
                     ctx.dispatch_typed_action(AgentSlideAction::PasteAuthTokenFromClipboardClicked);

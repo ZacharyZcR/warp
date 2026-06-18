@@ -94,7 +94,7 @@ where
             Some(click_button_style),
             None,
         )
-        .with_centered_text_label("Learn more".into())
+        .with_centered_text_label(t!("workspace.learn_more").into())
         .build()
         .on_click(move |ctx, _, _| {
             ctx.dispatch_typed_action(action.clone());
@@ -231,7 +231,7 @@ where
             .with_child(render_close_overlay_button(
                 appearance,
                 appearance.ui_builder(),
-                "Dismiss".into(),
+                t!("common.dismiss").into(),
                 mouse_state_handle,
                 action,
             ))
@@ -380,7 +380,7 @@ pub fn render_privacy_settings_overlay_body<A: Action + Clone + 'static>(
             .with_child(render_close_overlay_button(
                 appearance,
                 ui_builder,
-                "Done".into(),
+                t!("auth.done").into(),
                 handles.close_button_mouse.clone(),
                 actions.hide_overlay.clone(),
             ))
@@ -468,7 +468,7 @@ pub fn render_privacy_settings_toggles<A: Action + Clone + 'static>(
 
     let telemetry_description = render_description(
         appearance,
-        "High-level feature usage data helps Warp's product team prioritize the roadmap.".into(),
+        t!("auth.telemetry_description").into(),
     );
 
     let telemetry_link = Flex::row()
@@ -476,7 +476,7 @@ pub fn render_privacy_settings_toggles<A: Action + Clone + 'static>(
             appearance
                 .ui_builder()
                 .link(
-                    "Learn more".into(),
+                    t!("workspace.learn_more").into(),
                     Some(PRIVACY_URL.into()),
                     None,
                     handles.telemetry_docs_mouse.clone(),
@@ -513,7 +513,7 @@ pub fn render_privacy_settings_toggles<A: Action + Clone + 'static>(
 
     let crash_reporting_description = render_description(
         appearance,
-        "Crash reporting helps Warp's engineering team understand stability and improve performance.".into(),
+        t!("auth.crash_reporting_description").into(),
     );
 
     let toggle_cloud = actions.toggle_cloud_conversation_storage.clone();

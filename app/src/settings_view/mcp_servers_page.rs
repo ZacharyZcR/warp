@@ -149,7 +149,7 @@ impl MCPServersSettingsPageView {
     ) {
         let message = match server_name {
             Some(name) => format!("Successfully logged out of {name} MCP server"),
-            None => "Successfully logged out of MCP server".to_string(),
+            None => t!("mcp.logged_out_server").to_string(),
         };
         match item_id {
             ServerCardItemId::TemplatableMCP(_) => {
@@ -316,7 +316,7 @@ impl MCPServersSettingsPageView {
                 "Ignoring MCP deeplink autoinstall for '{autoinstall_param}': installation modal already open"
             );
             self.add_error_toast(
-                "Finish the current MCP install before opening another install link.".to_string(),
+                t!("mcp.finish_current_install_before_link").to_string(),
                 ctx,
             );
             return;

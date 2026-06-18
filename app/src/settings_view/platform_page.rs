@@ -186,7 +186,7 @@ impl PlatformPageView {
         });
 
         let create_api_key_modal_view = ctx.add_typed_action_view(|ctx| {
-            Modal::new(Some("New API key".to_string()), create_api_key_body, ctx)
+            Modal::new(Some(t!("platform.new_api_key").to_string()), create_api_key_body, ctx)
                 .with_modal_style(UiComponentStyles {
                     width: Some(MODAL_WIDTH),
                     height: Some(MODAL_HEIGHT),
@@ -237,7 +237,7 @@ impl PlatformPageView {
 
     fn show_create_api_key_modal(&mut self, ctx: &mut ViewContext<Self>) {
         self.create_api_key_modal_state
-            .set_title(Some("New API key".to_string()), ctx);
+            .set_title(Some(t!("platform.new_api_key").to_string()), ctx);
         self.create_api_key_modal_state.open(ctx);
         ctx.emit(PlatformPageViewEvent::ShowCreateApiKeyModal);
     }
@@ -266,7 +266,7 @@ impl PlatformPageView {
             }
             CreateApiKeyModalEvent::Created { api_key } => {
                 self.create_api_key_modal_state
-                    .set_title(Some("Save your key".to_string()), ctx);
+                    .set_title(Some(t!("platform.save_your_key").to_string()), ctx);
                 let ui_key = APIKeyProperties::from(api_key);
                 self.ensure_expire_button_for_key(ctx, ui_key.uid.clone());
                 self.api_keys.push(ui_key);
@@ -320,7 +320,7 @@ impl PlatformPageView {
                 let window_id = ctx.window_id();
                 crate::ToastStack::handle(ctx).update(ctx, |toast_stack, ctx| {
                     let toast = crate::view_components::DismissibleToast::success(
-                        "API key deleted".to_string(),
+                        t!("platform.api_key_deleted").to_string(),
                     );
                     toast_stack.add_ephemeral_toast(toast, window_id, ctx);
                 });
@@ -490,7 +490,7 @@ impl PlatformPageWidget {
     ) -> Box<dyn Element> {
         let text = vec![
             FormattedTextFragment::plain_text("Create and manage API keys to allow other Oz cloud agents to access your Warp account.\nFor more information, visit the "),
-            FormattedTextFragment::hyperlink("Documentation.", API_KEY_DOCS_URL),
+            FormattedTextFragment::hyperlink(t!("platform.documentation_link"), API_KEY_DOCS_URL),
         ];
 
         let text_element = FormattedTextElement::new(
@@ -537,7 +537,7 @@ impl PlatformPageWidget {
                             ButtonVariant::Outlined,
                             self.create_api_key_button_mouse_state.clone(),
                         )
-                        .with_text_label("+ Create API Key".to_string())
+                        .with_text_label(t!("platform_ext.create_api_key").to_string())
                         .build()
                         .on_click(|ctx, _, _| {
                             ctx.dispatch_typed_action(PlatformPageAction::ShowCreateApiKeyModal);

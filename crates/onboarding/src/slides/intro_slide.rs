@@ -90,7 +90,7 @@ impl View for IntroSlide {
             .with_child(
                 ui_builder
                     .link(
-                        "Log in".into(),
+                        t!("onboarding.intro.log_in").into(),
                         None,
                         Some(Box::new(|ctx| {
                             ctx.dispatch_typed_action(IntroSlideAction::LoginClicked);
@@ -176,7 +176,7 @@ impl IntroSlide {
         let get_started_button = self.get_started_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Get started".into()),
+                content: button::Content::Label(t!("onboarding.get_started").into()),
                 theme: &button::themes::Primary,
                 options: button::Options {
                     keystroke: Some(enter),

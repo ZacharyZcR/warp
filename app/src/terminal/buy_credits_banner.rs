@@ -477,7 +477,7 @@ impl BuyCreditsBanner {
                     }),
                     ..Default::default()
                 })
-                .with_text_label("Manage billing".to_string())
+                .with_text_label(t!("billing.manage_billing").to_string())
                 .build()
                 .on_click(|ctx, _, _| {
                     ctx.dispatch_typed_action(Action::ManageBilling);
@@ -578,7 +578,7 @@ impl BuyCreditsBanner {
                         "Purchasing these credits would take you over your monthly spend limit. ",
                     ),
                     FormattedTextFragment::hyperlink_action("Increase it", Action::ManageBilling),
-                    FormattedTextFragment::plain_text(" to continue."),
+                    FormattedTextFragment::plain_text(t!("buy_credits_banner.purchase_exceeds_limit_end")),
                 ];
 
                 let formatted_warning = FormattedTextElement::new(
@@ -647,9 +647,9 @@ impl BuyCreditsBanner {
                 || would_purchase_exceed_limit;
 
             let button_text = if self.purchase_addon_credits_loading {
-                "Buying…".to_string()
+                t!("buy_credits_banner.buying").to_string()
             } else {
-                "Buy".to_string()
+                t!("buy_credits_banner.buy").to_string()
             };
 
             let button_font_color = buy_button_disabled.then_some(

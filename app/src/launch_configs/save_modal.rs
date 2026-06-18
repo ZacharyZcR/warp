@@ -529,7 +529,7 @@ impl LaunchConfigSaveModal {
                 appearance
                     .ui_builder()
                     .link(
-                        "Link to Documentation".to_string(),
+                        t!("launch_config_save.link_to_documentation").to_string(),
                         Some(
                             "https://docs.warp.dev/terminal/sessions/launch-configurations"
                                 .to_string(),
@@ -551,7 +551,7 @@ impl LaunchConfigSaveModal {
             SaveState::Success => header
                 .with_child(
                     self.render_formatted_text_line(appearance, vec![
-                        FormattedTextFragment::plain_text("Saved successfully to "),
+                        FormattedTextFragment::plain_text(t!("launch_config_save.saved_to_start")),
                         FormattedTextFragment::inline_code(self.file_name.clone().unwrap_or_default()),
                         FormattedTextFragment::plain_text(".")
                     ])
@@ -564,9 +564,9 @@ impl LaunchConfigSaveModal {
                     appearance,
                     match failure_type {
                         FailureType::FileAlreadyExists => {
-                            "Failed to save. A launch configuration with the same name already exists.".to_string()
+                            t!("launch_config_save.failed_same_name").to_string()
                         }
-                        FailureType::Other => "An issue was encountered while saving.".to_string(),
+                        FailureType::Other => t!("launch_config_save.failed_generic").to_string(),
                     },
                 )
                 .with_padding_bottom(24.)

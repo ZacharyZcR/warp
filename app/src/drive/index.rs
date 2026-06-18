@@ -1590,7 +1590,7 @@ impl DriveIndex {
                 Some(empty_trash_hover_style),
                 Some(empty_trash_disabled_style),
             )
-            .with_text_label("Empty trash".to_string());
+            .with_text_label(t!("drive.empty_trash").to_string());
 
         // Only show Empty Trash button when online, do not show for Shared space
         if self.is_online(app) && space != &Space::Shared {
@@ -1803,7 +1803,7 @@ impl DriveIndex {
         let title = Container::new(
             appearance
                 .ui_builder()
-                .wrappable_text("TRASH".to_string(), false)
+                .wrappable_text(t!("drive.trash_section_label").to_string(), false)
                 .with_style(UiComponentStyles {
                     font_family_id: Some(appearance.ui_font_family()),
                     font_size: Some(SECTION_HEADER_FONT_SIZE),
@@ -2538,7 +2538,7 @@ impl DriveIndex {
         let text = Container::new(
             appearance
                 .ui_builder()
-                .span("Trash".to_string())
+                .span(t!("drive.trash").to_string())
                 .with_style(UiComponentStyles {
                     font_family_id: Some(appearance.ui_font_family()),
                     font_size: Some(TITLE_FONT_SIZE),
@@ -3950,7 +3950,7 @@ impl DriveIndex {
             .with_cross_axis_alignment(CrossAxisAlignment::Start)
             .with_main_axis_alignment(MainAxisAlignment::SpaceBetween)
             .with_child(
-                Text::new_inline("Warp Drive".to_string(), appearance.ui_font_family(), 14.)
+                Text::new_inline(t!("drive.title").to_string(), appearance.ui_font_family(), 14.)
                     .with_color(theme.main_text_color(background_color).into())
                     .with_style(Properties {
                         weight: warpui::fonts::Weight::Bold,
@@ -4052,7 +4052,7 @@ impl DriveIndex {
             .with_style(button_styles)
             .with_hovered_styles(hovered_and_clicked_styles)
             .with_active_styles(hovered_and_clicked_styles)
-            .with_centered_text_label("Sign up".to_string())
+            .with_centered_text_label(t!("workspace.sign_up").to_string())
             .build()
             .on_click(|ctx, _, _| ctx.dispatch_typed_action(DriveIndexAction::SignupAnonymousUser))
             .with_cursor(Cursor::PointingHand)
@@ -4196,7 +4196,7 @@ impl DriveIndex {
                     .shared_object_limit_hit_banner_button_mouse_state
                     .clone(),
             )
-            .with_centered_text_label("Compare plans".into())
+            .with_centered_text_label(t!("billing.compare_plans").into())
             .with_style(UiComponentStyles {
                 font_size: Some(14.),
                 font_weight: Some(Weight::Light),
@@ -4294,7 +4294,7 @@ impl DriveIndex {
                         .payment_issue_banner_button_mouse_state
                         .clone(),
                 )
-                .with_centered_text_label("Manage billing".into())
+                .with_centered_text_label(t!("billing.manage_billing").into())
                 .with_style(UiComponentStyles {
                     font_size: Some(14.),
                     font_weight: Some(Weight::Light),
@@ -4422,7 +4422,7 @@ impl DriveIndex {
                     }
                     if !FeatureFlag::SharedWithMe.is_enabled() || editability.can_edit() {
                         menu_items.push(
-                            MenuItemFields::new("Rename")
+                            MenuItemFields::new(t!("drive.rename"))
                                 .with_on_select_action(
                                     DriveIndexAction::OpenCloudObjectNamingDialog {
                                         space: *space,
@@ -4440,7 +4440,7 @@ impl DriveIndex {
                 if let Some(object) = object {
                     if let Some(object_link) = object.object_link() {
                         menu_items.push(
-                            MenuItemFields::new("Copy link")
+                            MenuItemFields::new(t!("drive.copy_link"))
                                 .with_on_select_action(DriveIndexAction::CopyObjectLinkToClipboard(
                                     object_link,
                                 ))
@@ -4449,7 +4449,7 @@ impl DriveIndex {
                         );
                         if editability.can_edit() {
                             menu_items.push(
-                                MenuItemFields::new("Share")
+                                MenuItemFields::new(t!("drive.share"))
                                     .with_on_select_action(DriveIndexAction::ToggleShareDialog {
                                         warp_drive_item_id: *warp_drive_item_id,
                                     })
@@ -4472,7 +4472,7 @@ impl DriveIndex {
                     );
                 }
                 menu_items.push(
-                    MenuItemFields::new("Collapse all")
+                    MenuItemFields::new(t!("drive.collapse_all"))
                         .with_on_select_action(DriveIndexAction::CollapseAllInLocation(
                             CloudObjectLocation::Folder(*folder_id),
                         ))
@@ -4497,7 +4497,7 @@ impl DriveIndex {
             if let Some(object) = object {
                 if self.is_online(app) && object.metadata().is_errored() {
                     menu_items.push(
-                        MenuItemFields::new("Retry")
+                        MenuItemFields::new(t!("drive.retry"))
                             .with_on_select_action(DriveIndexAction::RetryFailedObject(
                                 *cloud_object_type_and_id,
                             ))
@@ -4507,7 +4507,7 @@ impl DriveIndex {
 
                     if let Some(server_id) = cloud_object_type_and_id.server_id() {
                         menu_items.push(
-                            MenuItemFields::new("Revert to server")
+                            MenuItemFields::new(t!("drive.revert_to_server"))
                                 .with_on_select_action(DriveIndexAction::RevertFailedObject(
                                     server_id,
                                 ))
@@ -4529,7 +4529,7 @@ impl DriveIndex {
                     {
                         if let Some(ai_document_id) = notebook.model().ai_document_id {
                             menu_items.push(
-                                MenuItemFields::new("Attach to active session")
+                                MenuItemFields::new(t!("drive.attach_to_active_session"))
                                     .with_on_select_action(DriveIndexAction::AttachPlanAsContext(
                                         ai_document_id,
                                     ))
@@ -4591,7 +4591,7 @@ impl DriveIndex {
                         );
                         if workflow.model().data.is_agent_mode_workflow() {
                             menu_items.push(
-                                MenuItemFields::new("Copy id")
+                                MenuItemFields::new(t!("drive.copy_id"))
                                     .with_on_select_action(DriveIndexAction::CopyWorkflowId(
                                         *cloud_object_type_and_id,
                                     ))
@@ -4604,7 +4604,7 @@ impl DriveIndex {
                         JsonObjectType::EnvVarCollection,
                     )) => {
                         menu_items.push(
-                            MenuItemFields::new("Copy variables")
+                            MenuItemFields::new(t!("drive.copy_variables"))
                                 .with_on_select_action(DriveIndexAction::CopyObjectToClipboard(
                                     *cloud_object_type_and_id,
                                 ))
@@ -4612,7 +4612,7 @@ impl DriveIndex {
                                 .into_item(),
                         );
                         menu_items.push(
-                            MenuItemFields::new("Load in subshell")
+                            MenuItemFields::new(t!("drive.load_in_subshell"))
                                 .with_on_select_action(
                                     DriveIndexAction::InvokeEnvVarCollectionInSubshell(
                                         object.cloud_object_type_and_id(),
@@ -4696,7 +4696,7 @@ impl DriveIndex {
                             if let Some(object_link) = object.object_link() {
                                 if let Ok(url) = Url::parse(&object_link) {
                                     menu_items.push(
-                                        MenuItemFields::new("Open on Desktop")
+                                        MenuItemFields::new(t!("drive.open_on_desktop"))
                                             .with_on_select_action(
                                                 DriveIndexAction::OpenObjectLinkOnDesktop(url),
                                             )
@@ -4711,7 +4711,7 @@ impl DriveIndex {
                             || (self.is_online(app) && matches!(space, Space::Team { .. }))
                         {
                             menu_items.push(
-                                MenuItemFields::new("Duplicate")
+                                MenuItemFields::new(t!("drive.duplicate"))
                                     .with_on_select_action(DriveIndexAction::DuplicateObject(
                                         *cloud_object_type_and_id,
                                     ))
@@ -4726,7 +4726,7 @@ impl DriveIndex {
                 #[cfg(feature = "local_fs")]
                 if object.can_export() {
                     menu_items.push(
-                        MenuItemFields::new("Export")
+                        MenuItemFields::new(t!("drive.export"))
                             .with_on_select_action(DriveIndexAction::ExportObject(
                                 *cloud_object_type_and_id,
                             ))
@@ -4752,7 +4752,7 @@ impl DriveIndex {
             && (!FeatureFlag::SharedWithMe.is_enabled() || access_level.can_trash())
         {
             menu_items.push(
-                MenuItemFields::new("Trash")
+                MenuItemFields::new(t!("drive.trash"))
                     .with_on_select_action(DriveIndexAction::TrashObject {
                         cloud_object_type_and_id: *cloud_object_type_and_id,
                     })
@@ -4773,9 +4773,9 @@ impl DriveIndex {
         prefer_open: bool,
     ) -> MenuItemFields<DriveIndexAction> {
         if (FeatureFlag::SharedWithMe.is_enabled() && !editability.can_edit()) || prefer_open {
-            MenuItemFields::new("Open").with_icon(Icon::Eye)
+            MenuItemFields::new(t!("drive.open")).with_icon(Icon::Eye)
         } else {
-            MenuItemFields::new("Edit").with_icon(Icon::Rename)
+            MenuItemFields::new(t!("drive.edit")).with_icon(Icon::Rename)
         }
     }
 
@@ -4820,7 +4820,7 @@ impl DriveIndex {
         if self.online_only_operation_allowed(cloud_object_type_and_id, app) {
             if !FeatureFlag::SharedWithMe.is_enabled() || access_level.can_trash() {
                 menu_items.push(
-                    MenuItemFields::new("Restore")
+                    MenuItemFields::new(t!("drive.restore"))
                         .with_on_select_action(DriveIndexAction::UntrashObject {
                             cloud_object_type_and_id: *cloud_object_type_and_id,
                         })
@@ -4830,7 +4830,7 @@ impl DriveIndex {
             }
             if !FeatureFlag::SharedWithMe.is_enabled() || access_level.can_delete() {
                 menu_items.push(
-                    MenuItemFields::new("Delete forever")
+                    MenuItemFields::new(t!("drive.delete_forever"))
                         .with_on_select_action(DriveIndexAction::DeleteObject {
                             cloud_object_type_and_id: *cloud_object_type_and_id,
                         })

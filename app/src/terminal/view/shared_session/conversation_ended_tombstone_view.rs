@@ -199,7 +199,7 @@ impl ConversationEndedTombstoneView {
         let continue_in_cloud_button = match tombstone_cta {
             Some(TombstoneCta::ContinueInCloud { task_id }) => {
                 Some(ctx.add_typed_action_view(move |_| {
-                    ActionButton::new("Continue", PrimaryTheme)
+                    ActionButton::new(t!("common.continue"), PrimaryTheme)
                         .with_tooltip("Continue this cloud conversation")
                         .on_click(move |ctx| {
                             ctx.dispatch_typed_action(
@@ -215,7 +215,7 @@ impl ConversationEndedTombstoneView {
         let continue_locally_button = match tombstone_cta {
             Some(TombstoneCta::ContinueLocally { conversation_id }) => {
                 Some(ctx.add_typed_action_view(move |_| {
-                    ActionButton::new("Continue locally", PrimaryTheme)
+                    ActionButton::new(t!("ai_ext.continue_locally"), PrimaryTheme)
                         .with_tooltip("Fork this conversation locally")
                         .on_click(move |ctx| {
                             ctx.dispatch_typed_action(
@@ -236,7 +236,7 @@ impl ConversationEndedTombstoneView {
             } else {
                 conversation_id.map(|conv_id| {
                     ctx.add_typed_action_view(move |_| {
-                        ActionButton::new("Open in Warp", PrimaryTheme)
+                        ActionButton::new(t!("terminal_context_menu.open_in_warp"), PrimaryTheme)
                             .with_tooltip("Open this conversation in the Warp desktop app")
                             .on_click(move |ctx| {
                                 ctx.dispatch_typed_action(
@@ -376,7 +376,7 @@ impl ConversationEndedTombstoneView {
             .display_data
             .title
             .clone()
-            .unwrap_or_else(|| "Agent task".to_string());
+            .unwrap_or_else(|| t!("shared_session.agent_task").to_string());
         Flex::row()
             .with_main_axis_size(MainAxisSize::Min)
             .with_cross_axis_alignment(CrossAxisAlignment::Center)

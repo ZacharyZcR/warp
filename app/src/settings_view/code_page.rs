@@ -329,7 +329,7 @@ impl CodeSettingsPageView {
         });
 
         let manual_add_directory_button = ctx.add_typed_action_view(|_| {
-            ActionButton::new("Index new folder", SecondaryTheme)
+            ActionButton::new(t!("settings.index_new_folder"), SecondaryTheme)
                 .with_icon(Icon::FindAll)
                 .on_click(|ctx| {
                     ctx.dispatch_typed_action(CodeSettingsPageAction::ManualAddDirectory);
@@ -425,7 +425,7 @@ impl CodeSettingsPageView {
             // or the full categorized page when subpage is None.
             if let Some(subpage) = subpage {
                 let manual_add_directory_button = ctx.add_typed_action_view(|_| {
-                    ActionButton::new("Index new folder", SecondaryTheme)
+                    ActionButton::new(t!("settings.index_new_folder"), SecondaryTheme)
                         .with_icon(Icon::FindAll)
                         .on_click(|ctx| {
                             ctx.dispatch_typed_action(CodeSettingsPageAction::ManualAddDirectory);
@@ -475,7 +475,7 @@ impl CodeSettingsPageView {
     fn build_full_page(ctx: &mut ViewContext<Self>) -> PageType<Self> {
         if FeatureFlag::OpenWarpNewSettingsModes.is_enabled() {
             let manual_add_directory_button = ctx.add_typed_action_view(|_| {
-                ActionButton::new("Index new folder", SecondaryTheme)
+                ActionButton::new(t!("settings.index_new_folder"), SecondaryTheme)
                     .with_icon(Icon::FindAll)
                     .on_click(|ctx| {
                         ctx.dispatch_typed_action(CodeSettingsPageAction::ManualAddDirectory);
@@ -514,7 +514,7 @@ impl CodeSettingsPageView {
             PageType::new_categorized(categories, None)
         } else {
             let manual_add_directory_button = ctx.add_typed_action_view(|_| {
-                ActionButton::new("Index new folder", SecondaryTheme)
+                ActionButton::new(t!("settings.index_new_folder"), SecondaryTheme)
                     .with_icon(Icon::FindAll)
                     .on_click(|ctx| {
                         ctx.dispatch_typed_action(CodeSettingsPageAction::ManualAddDirectory);
@@ -2633,7 +2633,7 @@ impl SettingsWidget for AutoOpenCodeReviewPaneCodeWidget {
     ) -> Box<dyn Element> {
         let general_settings = GeneralSettings::as_ref(app);
         render_body_item::<CodeSettingsPageAction>(
-            "Auto open code review panel".into(),
+            t!("settings.auto_open_code_review_panel").into(),
             None,
             LocalOnlyIconState::Hidden,
             ToggleState::Enabled,
@@ -2647,7 +2647,7 @@ impl SettingsWidget for AutoOpenCodeReviewPaneCodeWidget {
                     ctx.dispatch_typed_action(CodeSettingsPageAction::ToggleAutoOpenCodeReviewPane);
                 })
                 .finish(),
-            Some("When this setting is on, the code review panel will open on the first accepted diff of a conversation".into()),
+            Some(t!("settings.auto_open_code_review_panel_description").into()),
         )
     }
 }
@@ -2710,7 +2710,7 @@ impl SettingsWidget for CodeReviewPanelToggleWidget {
         let tab_settings = TabSettings::as_ref(app);
 
         render_body_item::<CodeSettingsPageAction>(
-            "Show code review button".into(),
+            t!("settings.show_code_review_button").into(),
             None,
             LocalOnlyIconState::Hidden,
             ToggleState::Enabled,
@@ -2753,7 +2753,7 @@ impl SettingsWidget for CodeReviewDiffStatsToggleWidget {
         let tab_settings = TabSettings::as_ref(app);
 
         render_body_item::<CodeSettingsPageAction>(
-            "Show diff stats on code review button".into(),
+            t!("settings.show_code_review_diff_stats").into(),
             None,
             LocalOnlyIconState::Hidden,
             ToggleState::Enabled,
@@ -2769,7 +2769,7 @@ impl SettingsWidget for CodeReviewDiffStatsToggleWidget {
                     );
                 })
                 .finish(),
-            Some("Show lines added and removed counts on the code review button.".into()),
+            Some(t!("settings.show_code_review_diff_stats_description").into()),
         )
     }
 }
@@ -2795,7 +2795,7 @@ impl SettingsWidget for ProjectExplorerToggleWidget {
         let code_settings = CodeSettings::as_ref(app);
 
         render_body_item::<CodeSettingsPageAction>(
-            "Project explorer".into(),
+            t!("settings.project_explorer").into(),
             None,
             LocalOnlyIconState::Hidden,
             ToggleState::Enabled,
@@ -2838,7 +2838,7 @@ impl SettingsWidget for GlobalSearchToggleWidget {
         let code_settings = CodeSettings::as_ref(app);
 
         render_body_item::<CodeSettingsPageAction>(
-            "Global file search".into(),
+            t!("settings.global_file_search").into(),
             None,
             LocalOnlyIconState::Hidden,
             ToggleState::Enabled,
@@ -2852,7 +2852,7 @@ impl SettingsWidget for GlobalSearchToggleWidget {
                     ctx.dispatch_typed_action(CodeSettingsPageAction::ToggleGlobalSearch);
                 })
                 .finish(),
-            Some("Adds global file search to the left side tools panel.".into()),
+            Some(t!("settings.global_file_search_description").into()),
         )
     }
 }

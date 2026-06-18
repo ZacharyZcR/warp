@@ -218,7 +218,7 @@ impl View for AddRegexModal {
                 ButtonVariant::Accent,
                 self.submit_button_mouse_state.clone(),
             )
-            .with_text_label("Add regex".to_string())
+            .with_text_label(t!("privacy.add_regex").to_string())
             .with_style(button_style);
 
         if !is_submit_enabled {
@@ -259,7 +259,7 @@ impl View for AddRegexModal {
                         ButtonVariant::Secondary,
                         self.cancel_button_mouse_state.clone(),
                     )
-                    .with_text_label("Cancel".to_string())
+                    .with_text_label(t!("common.cancel").to_string())
                     .with_style(button_style)
                     .build()
                     .on_click(move |ctx, _, _| {

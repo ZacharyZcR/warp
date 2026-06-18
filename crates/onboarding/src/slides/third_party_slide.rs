@@ -177,11 +177,11 @@ impl ThirdPartySlide {
         let card = render_toggle_card(
             appearance,
             ToggleCardSpec {
-                title: "CLI agent toolbar",
+                title: crate::t!("onboarding.third_party.cli_agent_toolbar").to_string(),
                 is_expanded: is_selected,
                 is_left_selected: cli_toolbar_enabled,
-                left_label: "Enabled",
-                right_label: "Disabled",
+                left_label: crate::t!("onboarding.enabled").to_string(),
+                right_label: crate::t!("onboarding.disabled").to_string(),
                 card_mouse_state: self.cli_toolbar_card_mouse_state.clone(),
                 on_expand: Box::new(|ctx, _, _| {
                     ctx.dispatch_typed_action(ThirdPartySlideAction::SelectSettingCard {
@@ -225,11 +225,11 @@ impl ThirdPartySlide {
         let card = render_toggle_card(
             appearance,
             ToggleCardSpec {
-                title: "Notifications",
+                title: crate::t!("onboarding.third_party.notifications").to_string(),
                 is_expanded: is_selected,
                 is_left_selected: show_agent_notifications,
-                left_label: "Enabled",
-                right_label: "Disabled",
+                left_label: crate::t!("onboarding.enabled").to_string(),
+                right_label: crate::t!("onboarding.disabled").to_string(),
                 card_mouse_state: self.notifications_card_mouse_state.clone(),
                 on_expand: Box::new(|ctx, _, _| {
                     ctx.dispatch_typed_action(ThirdPartySlideAction::SelectSettingCard {
@@ -271,7 +271,7 @@ impl ThirdPartySlide {
         let back_button = self.back_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Back".into()),
+                content: button::Content::Label(t!("onboarding.back").into()),
                 theme: &button::themes::Naked,
                 options: button::Options {
                     on_click: Some(Box::new(|ctx, _app, _pos| {
@@ -286,7 +286,7 @@ impl ThirdPartySlide {
         let next_button = self.next_button.render(
             appearance,
             button::Params {
-                content: button::Content::Label("Next".into()),
+                content: button::Content::Label(t!("onboarding.next").into()),
                 theme: &button::themes::Primary,
                 options: button::Options {
                     keystroke: Some(enter),

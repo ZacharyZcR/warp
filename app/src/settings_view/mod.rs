@@ -284,21 +284,21 @@ use crate::util::bindings::custom_tag_to_keystroke;
 impl Display for SettingsSection {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            SettingsSection::BillingAndUsage => write!(f, "Billing and usage"),
-            SettingsSection::Keybindings => write!(f, "Keyboard shortcuts"),
-            SettingsSection::SharedBlocks => write!(f, "Shared blocks"),
-            SettingsSection::MCPServers => write!(f, "MCP Servers"),
+            SettingsSection::BillingAndUsage => write!(f, "{}", t!("settings.billing_and_usage")),
+            SettingsSection::Keybindings => write!(f, "{}", t!("settings.keyboard_shortcuts")),
+            SettingsSection::SharedBlocks => write!(f, "{}", t!("settings.shared_blocks")),
+            SettingsSection::MCPServers => write!(f, "{}", t!("settings.mcp_servers")),
             SettingsSection::Scripting => write!(f, "Scripting"),
-            SettingsSection::WarpDrive => write!(f, "Warp Drive"),
-            SettingsSection::WarpAgent => write!(f, "Warp Agent"),
-            SettingsSection::AgentProfiles => write!(f, "Profiles"),
+            SettingsSection::WarpDrive => write!(f, "{}", t!("settings.warp_drive")),
+            SettingsSection::WarpAgent => write!(f, "{}", t!("settings.warp_agent")),
+            SettingsSection::AgentProfiles => write!(f, "{}", t!("settings.profiles")),
             SettingsSection::AgentMCPServers => write!(f, "MCP servers"),
-            SettingsSection::Knowledge => write!(f, "Knowledge"),
-            SettingsSection::ThirdPartyCLIAgents => write!(f, "Third party CLI agents"),
-            SettingsSection::CodeIndexing => write!(f, "Indexing and projects"),
-            SettingsSection::EditorAndCodeReview => write!(f, "Editor and Code Review"),
-            SettingsSection::CloudEnvironments => write!(f, "Environments"),
-            SettingsSection::OzCloudAPIKeys => write!(f, "Oz Cloud API Keys"),
+            SettingsSection::Knowledge => write!(f, "{}", t!("settings.knowledge")),
+            SettingsSection::ThirdPartyCLIAgents => write!(f, "{}", t!("settings.third_party_cli_agents")),
+            SettingsSection::CodeIndexing => write!(f, "{}", t!("settings.indexing_and_projects")),
+            SettingsSection::EditorAndCodeReview => write!(f, "{}", t!("settings.editor_and_code_review")),
+            SettingsSection::CloudEnvironments => write!(f, "{}", t!("settings.environments")),
+            SettingsSection::OzCloudAPIKeys => write!(f, "{}", t!("settings.oz_cloud_api_keys")),
             _ => write!(f, "{self:?}"),
         }
     }
@@ -1632,28 +1632,28 @@ impl SettingsView {
 
         if ContextFlag::CreateNewSession.is_enabled() {
             items.extend(vec![
-                MenuItemFields::new("Split pane right")
+                MenuItemFields::new(t!("common.split_pane_right"))
                     .with_on_select_action(SettingsAction::Split(Direction::Right))
                     .with_key_shortcut_label(keybinding_name_to_display_string(
                         "pane_group:add_right",
                         ctx,
                     ))
                     .into_item(),
-                MenuItemFields::new("Split pane left")
+                MenuItemFields::new(t!("common.split_pane_left"))
                     .with_on_select_action(SettingsAction::Split(Direction::Left))
                     .with_key_shortcut_label(keybinding_name_to_display_string(
                         "pane_group:add_left",
                         ctx,
                     ))
                     .into_item(),
-                MenuItemFields::new("Split pane down")
+                MenuItemFields::new(t!("common.split_pane_down"))
                     .with_on_select_action(SettingsAction::Split(Direction::Down))
                     .with_key_shortcut_label(keybinding_name_to_display_string(
                         "pane_group:add_down",
                         ctx,
                     ))
                     .into_item(),
-                MenuItemFields::new("Split pane up")
+                MenuItemFields::new(t!("common.split_pane_up"))
                     .with_on_select_action(SettingsAction::Split(Direction::Up))
                     .with_key_shortcut_label(keybinding_name_to_display_string(
                         "pane_group:add_up",
@@ -1682,7 +1682,7 @@ impl SettingsView {
             );
 
             items.push(
-                MenuItemFields::new("Close pane")
+                MenuItemFields::new(t!("common.close_pane"))
                     .with_on_select_action(SettingsAction::Close)
                     .with_key_shortcut_label(
                         custom_tag_to_keystroke(CustomAction::CloseCurrentSession.into())

@@ -152,8 +152,8 @@ impl View for WasmNUXDialog {
 
         let dialog = if self.requested_download {
             Dialog::new(
-                "Open in Warp Desktop?".to_string(),
-                Some("Future links will automatically open on desktop.".to_string()),
+                t!("wasm_nux.open_in_desktop_title").to_string(),
+                Some(t!("wasm_nux.future_links_desktop").to_string()),
                 dialog_styles,
             )
             .with_bottom_row_child(Self::render_dialog_button(
@@ -163,7 +163,7 @@ impl View for WasmNUXDialog {
                 appearance,
             ))
         } else if app_install_detected == &UserAppInstallStatus::NotDetected {
-            Dialog::new("Download Warp Desktop?".to_string(), None, dialog_styles)
+            Dialog::new(t!("wasm_nux.download_desktop_title").to_string(), None, dialog_styles)
                 .with_child(
                     Flex::column()
                         .with_cross_axis_alignment(CrossAxisAlignment::Stretch)
@@ -191,7 +191,7 @@ impl View for WasmNUXDialog {
                                 appearance
                                     .ui_builder()
                                     .link(
-                                        "Learn more".to_string(),
+                                        t!("wasm_nux.learn_more").to_string(),
                                         None,
                                         Some(Box::new(|ctx| {
                                             ctx.dispatch_typed_action(
@@ -223,7 +223,7 @@ impl View for WasmNUXDialog {
 
             Dialog::new(
                 format!("Always open {object_kind} on the web?"),
-                Some("You can change this at any time in settings.".to_string()),
+                Some(t!("wasm_nux.change_any_time").to_string()),
                 dialog_styles,
             )
             .with_bottom_row_child(Self::render_dialog_button(

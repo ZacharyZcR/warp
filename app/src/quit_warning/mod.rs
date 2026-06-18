@@ -328,7 +328,7 @@ impl<'a> UnsavedStateSummary<'a> {
 
         if self.unsaved_code_changes {
             if let QuitScope::EditorTab { ref file_name, .. } = self.scope {
-                info_text_lines.push(format!("Do you want to save the changes you made to {}? Your changes will be discarded if you don't save them.", file_name.clone().unwrap_or("this file".to_string())));
+                info_text_lines.push(format!("Do you want to save the changes you made to {}? Your changes will be discarded if you don't save them.", file_name.clone().unwrap_or(t!("quit_warning.this_file").to_string())));
             } else {
                 info_text_lines.push(format!("You have unsaved file changes{scope_suffix}"));
             }
@@ -404,17 +404,17 @@ impl<'a> QuitWarningDialog<'a> {
         }
 
         if let Some(callback) = on_save_changes {
-            buttons.push(ModalButton::for_app("Save".to_string(), callback));
+            buttons.push(ModalButton::for_app(t!("common.save").to_string(), callback));
         }
 
         if let Some(callback) = on_discard_changes {
-            buttons.push(ModalButton::for_app("Don't Save".to_string(), callback));
+            buttons.push(ModalButton::for_app(t!("quit_warning.dont_save").to_string(), callback));
         }
 
         if let Some(callback) = on_show_processes {
             if state.total_long_running_commands > 0 {
                 buttons.push(ModalButton::for_app(
-                    "Show running processes".to_string(),
+                    t!("quit_warning.show_running_processes").to_string(),
                     move |app| {
                         callback(app);
                     },
@@ -423,7 +423,7 @@ impl<'a> QuitWarningDialog<'a> {
         }
 
         if let Some(callback) = on_cancel {
-            buttons.push(ModalButton::for_app("Cancel".to_string(), callback));
+            buttons.push(ModalButton::for_app(t!("common.cancel").to_string(), callback));
         }
 
         let title = match &state.scope {

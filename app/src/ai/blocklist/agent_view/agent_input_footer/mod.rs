@@ -383,7 +383,7 @@ impl AgentInputFooter {
         // CLI agent-specific buttons (only rendered when a CLI agent session is active).
         let cli_button_size = ButtonSize::AgentInputButton;
         let file_explorer_button = ctx.add_typed_action_view(|ctx| {
-            ActionButton::new("File explorer", AgentInputButtonTheme)
+            ActionButton::new(t!("ai_ext.file_explorer"), AgentInputButtonTheme)
                 .with_icon(Icon::FileCopy)
                 .with_tooltip("Open file explorer")
                 .with_size(cli_button_size)
@@ -398,7 +398,7 @@ impl AgentInputFooter {
                 })
         });
         let rich_input_button = ctx.add_typed_action_view(|ctx| {
-            ActionButton::new("Rich Input", AgentInputButtonTheme)
+            ActionButton::new(t!("ai_ext.rich_input"), AgentInputButtonTheme)
                 .with_icon(Icon::TextInput)
                 .with_tooltip("Open Rich Input")
                 .with_size(cli_button_size)
@@ -424,7 +424,7 @@ impl AgentInputFooter {
         });
 
         let install_plugin_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Enable notifications", InstallPluginButtonTheme)
+            ActionButton::new(t!("ai_ext.enable_notifications"), InstallPluginButtonTheme)
                 .with_icon(Icon::Download)
                 .with_tooltip(
                     "Install the Warp plugin to enable rich agent notifications within Warp",
@@ -438,7 +438,7 @@ impl AgentInputFooter {
         });
 
         let plugin_instructions_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Notifications setup instructions", InstallPluginButtonTheme)
+            ActionButton::new(t!("ai_ext.notifications_setup"), InstallPluginButtonTheme)
                 .with_icon(Icon::Info)
                 .with_tooltip("View instructions to install the Warp plugin")
                 .with_size(cli_button_size)
@@ -452,7 +452,7 @@ impl AgentInputFooter {
         });
 
         let update_plugin_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Update Warp plugin", InstallPluginButtonTheme)
+            ActionButton::new(t!("ai_ext.update_warp_plugin"), InstallPluginButtonTheme)
                 .with_icon(Icon::Download)
                 .with_tooltip("A new version of the Warp plugin is available")
                 .with_size(cli_button_size)
@@ -464,7 +464,7 @@ impl AgentInputFooter {
         });
 
         let update_instructions_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Plugin update instructions", InstallPluginButtonTheme)
+            ActionButton::new(t!("ai_ext.plugin_update_instructions"), InstallPluginButtonTheme)
                 .with_icon(Icon::Info)
                 .with_tooltip("View instructions to update the Warp plugin")
                 .with_size(cli_button_size)
@@ -589,7 +589,7 @@ impl AgentInputFooter {
         });
 
         let stop_remote_control_button = ctx.add_typed_action_view(|_ctx| {
-            ActionButton::new("Stop sharing", RemoteControlButtonTheme)
+            ActionButton::new(t!("ai_ext.stop_sharing"), RemoteControlButtonTheme)
                 .with_icon(Icon::StopFilled)
                 .with_icon_ansi_color(AnsiColorIdentifier::Red)
                 .with_tooltip("Stop sharing")

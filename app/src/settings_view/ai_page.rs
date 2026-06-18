@@ -8345,7 +8345,7 @@ impl SettingsWidget for ApiKeysWidget {
             {
                 if team.billing_metadata.customer_type == CustomerType::Enterprise {
                     vec![
-                        FormattedTextFragment::hyperlink("Contact sales", "mailto:sales@warp.dev"),
+                        FormattedTextFragment::hyperlink(t!("ai_settings_page.contact_sales"), "mailto:sales@warp.dev"),
                         FormattedTextFragment::plain_text(
                             " to enable bringing your own API keys on your Enterprise plan.",
                         ),
@@ -8360,7 +8360,7 @@ impl SettingsWidget for ApiKeysWidget {
                                 "Upgrade to the Build plan",
                                 upgrade_url,
                             ),
-                            FormattedTextFragment::plain_text(" to use your own API keys."),
+                            FormattedTextFragment::plain_text(t!("ai_settings_page.use_own_api_keys_suffix")),
                         ]
                     } else {
                         vec![FormattedTextFragment::plain_text(
@@ -8376,14 +8376,14 @@ impl SettingsWidget for ApiKeysWidget {
                         "Create an account",
                         AISettingsPageAction::SignupAnonymousUser,
                     ),
-                    FormattedTextFragment::plain_text(" to use your own API keys."),
+                    FormattedTextFragment::plain_text(t!("ai_settings_page.use_own_api_keys_suffix")),
                 ]
             } else {
                 let user_id = auth_state.user_id().unwrap_or_default();
                 let upgrade_url = UserWorkspaces::upgrade_link(user_id);
                 vec![
-                    FormattedTextFragment::hyperlink("Upgrade to the Build plan", upgrade_url),
-                    FormattedTextFragment::plain_text(" to use your own API keys."),
+                    FormattedTextFragment::hyperlink(t!("ai_settings_page.upgrade_to_build_plan"), upgrade_url),
+                    FormattedTextFragment::plain_text(t!("ai_settings_page.use_own_api_keys_suffix")),
                 ]
             };
 
